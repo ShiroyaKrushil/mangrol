@@ -6,9 +6,15 @@ const Navleft = () => {
     <div>
       <div className="container">
         <div className="row">
+          <i
+            className="fa-solid fa-user fs-5 p-3 "
+            style={{marginLeft:'200px',color:'white'}}
+          ></i>
+        </div>
+        <div className="row">
           <div className="col mt-5">
             <img
-              src={require("../assets/images/teacher-2.jpg" )}
+              src={require("../assets/images/teacher-2.jpg")}
               className="p-img img-fluid"
             />
             <div className="row mt-3">
