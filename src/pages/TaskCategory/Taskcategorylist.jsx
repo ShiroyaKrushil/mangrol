@@ -1,35 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Button from "../../Components/Button";
 
 const Taskcategorylist = () => {
   return (
-    <div className="container-">
-      <div className="row">
-        <h2 className="mb-4">TaskCategory</h2>
-        <div className="col addcompany-link ">
-          <Link to="/addtaskcategory">Add</Link>
+    <div className="container- px-3 mt-5">
+      <div className="row p-4">
+        <div className="col-6">
+          <h2>TaskCategory List</h2>
         </div>
+        <div className="col-6">
+          <Button name='Add' icon={<i class="fa-solid fa-plus p-1"></i>} link="/addtaskcategory" className="float-end"/>
+        </div>
+      </div>
+
+      <div className="row p-4">
         <table class="table mt-5">
-          <thead
-            style={{
-              background: "#f8fafc",
-              boxShadow: "0px 0px 2px 0px black",
-            }}
-          >
-            <tr className="text-center  fs-5">
-              <th scope="col">Name</th>
-              <th scope="col">Color</th>
-              <th scope="col">Company</th>
-              <th scope="col">Status</th>
-              <th scope="col">Details</th>
+          <thead>
+            <tr className="text-center  fs-6">
+              <th scope="col">Name<i className="fa-solid fa-arrow-up" style={{ paddingLeft: "3px" }}></i></th>
+              <th scope="col">Color<i className="fa-solid fa-arrow-up" style={{ paddingLeft: "3px" }}></i></th>
+              <th scope="col">Company<i className="fa-solid fa-arrow-up" style={{ paddingLeft: "3px" }}></i></th>
+              <th scope="col">Status<i className="fa-solid fa-arrow-up" style={{ paddingLeft: "3px" }}></i></th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
             <tr className="text-center fs-6">
-              <td>jay</td>
-              <td>red</td>
-              <td>prolink</td>
-              <td>Active</td>
+              <td>Meera</td>
+              <td>8320066228</td>
+              <td>Car</td>
+              <td>meera@gmail.com</td>
+              
               <td>
                 <Link to="/viewtaskcategory">
                   <i class="fa-sharp fa-solid fa-eye text-black"></i>
@@ -38,6 +40,35 @@ const Taskcategorylist = () => {
             </tr>
           </tbody>
         </table>
+        <nav aria-label="Page navigation example ">
+          <ul class="pagination d-flex justify-content-center">
+            <li class="page-item">
+              <a class="page-link" href="#">
+                Previous
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">
+                1
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">
+                2
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">
+                3
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">
+                Next
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   );

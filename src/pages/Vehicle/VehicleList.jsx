@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Button from "../../Components/Button";
 
 const VehicleList = () => {
   const data = [
@@ -13,21 +14,22 @@ const VehicleList = () => {
   ];
 
   return (
-    <div className="container- px-5 mt-5">
-      <div className="row">
+    <div className="container- px-3 mt-5">
+      <div className="row p-4">
         <div className="col-6">
-          <h2 className="mb-4">Vehicle</h2>
+          <h2>Vehicle List</h2>
         </div>
-        <div className="col-6 addcompany-link">
-          <Link
-            to="/addvehicle"
-            className="px-4 py-2 rounded-5 bg-primary float-end"
-          >
-            <i class="fa-solid fa-plus"></i> Add
-          </Link>
+        <div className="col-6">
+          <Button
+            name="Add"
+            icon={<i class="fa-solid fa-plus p-1"></i>}
+            link="/addvehicle"
+            className="float-end"
+          />
         </div>
       </div>
-      <div className="row flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto ng-tns-c142-6">
+
+      <div className="row p-4">
         <table class="table mt-5">
           <thead>
             <tr className="text-center  fs-6">
@@ -38,9 +40,28 @@ const VehicleList = () => {
                   style={{ paddingLeft: "3px" }}
                 ></i>
               </th>
-              <th scope="col">VehicleNo</th>
-              <th scope="col">Company</th>
-              <th scope="col">Status</th>
+              <th scope="col">
+                Vehicle No
+                <i
+                  className="fa-solid fa-arrow-up"
+                  style={{ paddingLeft: "3px" }}
+                ></i>
+              </th>
+              <th scope="col">
+                Company
+                <i
+                  className="fa-solid fa-arrow-up"
+                  style={{ paddingLeft: "3px" }}
+                ></i>
+              </th>
+              <th scope="col">
+                Status
+                <i
+                  className="fa-solid fa-arrow-up"
+                  style={{ paddingLeft: "3px" }}
+                ></i>
+              </th>
+
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -50,7 +71,7 @@ const VehicleList = () => {
                 <>
                   <tr className="text-center fs-6">
                     <td>{item.Name}</td>
-                    <td> {item.VehicleNo} </td>
+                    <td>{item.VehicleNo}</td>
                     <td>{item.Company}</td>
                     <td>{item.Status}</td>
                     <td>
@@ -65,34 +86,34 @@ const VehicleList = () => {
           </tbody>
         </table>
         <nav aria-label="Page navigation example ">
-            <ul class="pagination d-flex justify-content-center">
-              <li class="page-item">
-                <a class="page-link" href="#">
-                  Previous
-                </a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="#">
-                  1
-                </a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="#">
-                  2
-                </a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="#">
-                  3
-                </a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="#">
-                  Next
-                </a>
-              </li>
-            </ul>
-          </nav>
+          <ul class="pagination d-flex justify-content-center">
+            <li class="page-item">
+              <a class="page-link" href="#">
+                Previous
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">
+                1
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">
+                2
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">
+                3
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">
+                Next
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   );

@@ -1,9 +1,10 @@
 import React from 'react'
+import Sitelist from './Sitelist';
 
 const Site = () => {
   return (
     <div>
-      site
+      <Sitelist />
     </div>
   )
 }

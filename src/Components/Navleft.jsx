@@ -87,10 +87,6 @@ const Navleft = () => {
                 <i class="fa-solid fa-person"></i>
                 <Link to="/lead">Lead</Link>
               </li>
-              <li className="link">
-                <i class="fa-solid fa-person"></i>
-                <Link to="/deviceToken">deviceToken</Link>
-              </li>
             </ul>
           </div>
         </div>

@@ -256,7 +256,7 @@ const List = () => {
               <th scope="col">Email</th>
               <th scope="col">Phone</th>
               <th scope="col">Status</th>
-              <th scope="col">Details</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>

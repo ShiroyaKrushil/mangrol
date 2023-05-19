@@ -1,9 +1,9 @@
 import React from 'react'
-
+import Expensecategorylist from './Expensecategorylist'
 const Expensecategory = () => {
   return (
     <div>
-      Expensecategory
+      <Expensecategorylist />
     </div>
   )
 }

@@ -1,9 +1,10 @@
 import React from 'react'
+import Tasklist from './Tasklist'
 
 const Task = () => {
   return (
     <div>
-      task
+      <Tasklist />
     </div>
   )
 }

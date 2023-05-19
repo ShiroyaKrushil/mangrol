@@ -1,40 +1,41 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Button from "../../Components/Button";
 
 const Driverattendancelist = () => {
   return (
-    <div className="container-">
-      <div className="row">
-        <h2 className="mb-4">DriverAttendance</h2>
-        <div className="col addcompany-link ">
-          <Link to="/adddriverattendance">Add</Link>
+    <div className="container- px-3 mt-5">
+      <div className="row p-4">
+        <div className="col-6">
+          <h2>Driver Attendances List</h2>
         </div>
+        <div className="col-6">
+          <Button name='Add' icon={<i class="fa-solid fa-plus p-1"></i>} link="/adddriverattendance" className="float-end"/>
+        </div>
+      </div>
+
+      <div className="row p-4">
         <table class="table mt-5">
-          <thead
-            style={{
-              background: "#f8fafc",
-              boxShadow: "0px 0px 2px 0px black",
-            }}
-          >
-            <tr className="text-center  fs-5">
-              <th scope="col">Date</th>
-              <th scope="col">PunchInTime</th>
-              <th scope="col">PunchOutTime</th>
-              <th scope="col">TotalWorkingHours</th>
-              <th scope="col">Driver</th>
-              <th scope="col">Company </th>
-              <th scope="col">Status</th>
-              <th scope="col">Details</th>
+          <thead>
+            <tr className="text-center  fs-6">
+              <th scope="col">Date<i className="fa-solid fa-arrow-up" style={{ paddingLeft: "3px" }}></i></th>
+              <th scope="col">PunchInTime<i className="fa-solid fa-arrow-up" style={{ paddingLeft: "3px" }}></i></th>
+              <th scope="col">PunchOutTime<i className="fa-solid fa-arrow-up" style={{ paddingLeft: "3px" }}></i></th>
+              <th scope="col">TotalWorkingHours<i className="fa-solid fa-arrow-up" style={{ paddingLeft: "3px" }}></i></th>
+              <th scope="col">Driver<i className="fa-solid fa-arrow-up" style={{ paddingLeft: "3px" }}></i></th>
+              <th scope="col">Company<i className="fa-solid fa-arrow-up" style={{ paddingLeft: "3px" }}></i></th>
+              <th scope="col">Dtatus<i className="fa-solid fa-arrow-up" style={{ paddingLeft: "3px" }}></i> </th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
             <tr className="text-center fs-6">
-              <td>20/02/2023</td>
-              <td>10:30</td>
-              <td>11:00</td>
-              <td>15</td>
-              <td>ajay</td>
-              <td>prolink</td>
+              <td>Meera</td>
+              <td>8320066228</td>
+              <td>Car</td>
+              <td>meera@gmail.com</td>
+              <td>Femail</td>
+              <td>14/02/2003</td>
               <td>Active</td>
               <td>
                 <Link to="/viewdriverattendance">
@@ -44,6 +45,35 @@ const Driverattendancelist = () => {
             </tr>
           </tbody>
         </table>
+        <nav aria-label="Page navigation example ">
+          <ul class="pagination d-flex justify-content-center">
+            <li class="page-item">
+              <a class="page-link" href="#">
+                Previous
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">
+                1
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">
+                2
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">
+                3
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">
+                Next
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   );

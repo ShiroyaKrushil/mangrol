@@ -1,9 +1,10 @@
 import React from 'react'
+import Expenselist from './Expenselist'
 
 const Expense = () => {
   return (
     <div>
-      Expense
+      <Expenselist />
     </div>
   )
 }

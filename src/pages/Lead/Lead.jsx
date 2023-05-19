@@ -1,9 +1,10 @@
 import React from 'react'
+import Leadlist from './Leadlist'
 
 const Lead = () => {
   return (
     <div>
-      Lead
+      <Leadlist />
     </div>
   )
 }

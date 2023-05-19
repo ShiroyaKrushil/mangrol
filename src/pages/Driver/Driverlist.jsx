@@ -1,36 +1,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Button from "../../Components/Button";
 
 const Driverlist = () => {
   return (
-    <div className="container- px-5 mt-5">
-      <div className="row">
+    <div className="container- px-3 mt-5">
+      <div className="row p-4">
         <div className="col-6">
-          <h2 className="mb-4">Driver</h2>
+          <h2>Driver List</h2>
         </div>
-        <div className="col-6 addcompany-link">
-          <Link
-            to="/adddriver"
-            className="px-4 py-2 rounded-5 bg-primary float-end"
-          >
-            <i class="fa-solid fa-plus"></i> Add
-          </Link>
+        <div className="col-6">
+          <Button name='Add' icon={<i class="fa-solid fa-plus p-1"></i>} link="/adddriver" className="float-end"/>
         </div>
       </div>
-      <div className="row">
+
+      <div className="row p-4">
         <table class="table mt-5">
           <thead>
             <tr className="text-center  fs-6">
-              <th scope="col">Name</th>
-              <th scope="col">Phone</th>
-              <th scope="col">Vehicle</th>
-              <th scope="col">Email</th>
-              <th scope="col">Gender</th>
-              <th scope="col">BirthDate</th>
-              <th scope="col">DrivingLicenseNo </th>
-              <th scope="col">AadharNo</th>
-              <th scope="col">Status</th>
-              <th scope="col">Details</th>
+              <th scope="col">Name<i className="fa-solid fa-arrow-up" style={{ paddingLeft: "3px" }}></i></th>
+              <th scope="col">Phone<i className="fa-solid fa-arrow-up" style={{ paddingLeft: "3px" }}></i></th>
+              <th scope="col">Vehicle<i className="fa-solid fa-arrow-up" style={{ paddingLeft: "3px" }}></i></th>
+              <th scope="col">Email<i className="fa-solid fa-arrow-up" style={{ paddingLeft: "3px" }}></i></th>
+              <th scope="col">Gender<i className="fa-solid fa-arrow-up" style={{ paddingLeft: "3px" }}></i></th>
+              <th scope="col">BirthDate<i className="fa-solid fa-arrow-up" style={{ paddingLeft: "3px" }}></i></th>
+              <th scope="col">DrivingLicenseNo<i className="fa-solid fa-arrow-up" style={{ paddingLeft: "3px" }}></i> </th>
+              <th scope="col">AadharNo<i className="fa-solid fa-arrow-up" style={{ paddingLeft: "3px" }}></i></th>
+              <th scope="col">Status<i className="fa-solid fa-arrow-up" style={{ paddingLeft: "3px" }}></i></th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -52,6 +49,35 @@ const Driverlist = () => {
             </tr>
           </tbody>
         </table>
+        <nav aria-label="Page navigation example ">
+          <ul class="pagination d-flex justify-content-center">
+            <li class="page-item">
+              <a class="page-link" href="#">
+                Previous
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">
+                1
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">
+                2
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">
+                3
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">
+                Next
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   );
