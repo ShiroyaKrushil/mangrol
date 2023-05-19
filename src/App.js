@@ -66,10 +66,10 @@ import Signup from './pages/Home/signUp/Signup'
 
 function App() {
   const [sidebar, setSidebar] = useState(true)
-
+  const auth = localStorage.getItem('user');
   return (
     <div>
-      <BrowserRouter>
+      <BrowserRouter>{auth ?
         <div className={`main ${sidebar ? 'msb-x' : ''}`}>
           <div className="msb" id="msb">
             <Navleft />
@@ -156,7 +156,7 @@ function App() {
 
             </Routes>
           </div>
-        </div>
+        </div>: <Login />}
 
       </BrowserRouter>
     </div>
