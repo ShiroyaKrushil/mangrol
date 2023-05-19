@@ -62,15 +62,14 @@ const Adddriver = () => {
             <div class="col- col-md-4 col-sm-12">
               <label for="formGroupExampleInput" className="fs-6 mt-sm-4 mt-md-0">Blood Group </label>
               <select name="" id="" class="form-select">
-                <option value="">1</option>
-                <option value="">2</option>
-                <option value="">3</option>
-                <option value="">4</option>
-                <option value="">5</option>
-                <option value="">6</option>
-                <option value="">7</option>
-                <option value="">8</option>
-                <option value="">9</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
               </select>
             </div>
           </div>
