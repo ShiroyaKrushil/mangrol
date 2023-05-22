@@ -9,6 +9,11 @@ const Adddriver = () => {
   const handlefile =(e)=>{
     setFile(URL.createObjectURL(e.target.files[0]));
   }
+
+  const d = new Date();
+  const currentdate = d.toISOString().substring(0,10);
+  const currenttime = d.toISOString().substring(11,16);
+  console.log(currenttime)
   return (
     <div class="container- px-3 mt-5">
       <div className="row p-4">
@@ -395,7 +400,7 @@ const Adddriver = () => {
               <label for="formGroupExampleInput" className="fs-6 ">
                 Date
               </label>
-              <input type="date" class="form-control" />
+              <input type="date" class="form-control" value={currentdate}/>
             </div>
             <div class="col- col-md-6 col-sm-12 mt-4">
               <label
@@ -404,7 +409,7 @@ const Adddriver = () => {
               >
                 Time
               </label>
-              <input type="time" class="form-control" />
+              <input type="time" class="form-control" value={currenttime}/>
             </div>
           </div>
         </form>

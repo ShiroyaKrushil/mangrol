@@ -3,13 +3,13 @@ import Button from "../../Components/Button";
 
 const View = () => {
   return (
-    <div class="container- px-3 mt-5">
+    <div className="container- px-3 mt-5">
       <div className="row p-4">
         <div className="col-6">
           <h2>Company Profile</h2>
         </div>
         <div className="col-6">
-          <Button name="Back" link="/company" icon={<i class="fa-solid fa-arrow-left p-1"></i>}/>
+          <Button name="Back" link="/company" icon={<i className="fa-solid fa-arrow-left p-1"></i>}/>
         </div>
       </div>
       <div className="view">
@@ -47,13 +47,13 @@ const View = () => {
             <Button
               name="Edit"
               link="/edit"
-              icon={<i class="fa-regular fa-pen-to-square p-1"></i>}
+              icon={<i className="fa-regular fa-pen-to-square p-1"></i>}
             />
           </div>
           <div className="p-1">
             <Button
               Actionbtn="Delete"
-              icon={<i class="fa-sharp fa-solid fa-trash p-1"></i>}
+              icon={<i className="fa-sharp fa-solid fa-trash p-1"></i>}
             />
           </div>
         </div>

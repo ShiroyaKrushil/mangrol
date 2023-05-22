@@ -6,10 +6,20 @@ const Navleft = () => {
     <div>
       <div className="container">
         <div className="row">
-          <i
-            className="fa-solid fa-user fs-5 p-3 "
-            style={{marginLeft:'200px',color:'white'}}
-          ></i>
+          <div class="dropdown-toggle-split">
+            <i
+              className="fa-solid fa-user fs-5 p-3 "
+              style={{ marginLeft: "200px", color: "white",cursor:'pointer' }}
+              data-toggle="dropdown"
+              id="dropdownMenuButton"
+            ></i>
+            <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">
+                LogOut
+              </a>
+              
+            </div>
+          </div>
         </div>
         <div className="row">
           <div className="col mt-5">

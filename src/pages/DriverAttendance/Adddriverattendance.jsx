@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import Button from "../../Components/Button";
 
 const Adddriverattendance = () => {
+  const d = new Date();
+  const currentdate = d.toISOString().substring(0,10);
+  const currenttime = d.toISOString().substring(11,16);
+
   return (
     <div class="container- px-3 mt-5">
       <div className="row p-4">
@@ -94,7 +98,7 @@ const Adddriverattendance = () => {
               <label for="formGroupExampleInput" className="fs-6 ">
                 Date
               </label>
-              <input type="date" class="form-control" />
+              <input type="date" class="form-control" value={currentdate}/>
             </div>
             <div class="col- col-md-6 col-sm-12 mt-4">
               <label
@@ -103,7 +107,7 @@ const Adddriverattendance = () => {
               >
                 Time
               </label>
-              <input type="time" class="form-control" />
+              <input type="time" class="form-control" value={currenttime}/>
             </div>
           </div>
         </form>

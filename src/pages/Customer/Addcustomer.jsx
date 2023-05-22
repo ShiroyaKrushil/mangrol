@@ -2,6 +2,10 @@ import React from "react";
 import Button from "../../Components/Button";
 
 const Addcustomer = () => {
+  const d = new Date();
+  const currentdate = d.toISOString().substring(0,10);
+  const currenttime = d.toISOString().substring(11,16);
+
   return (
     <div class="container- px-3 mt-5">
       <div className="row p-4">
@@ -131,7 +135,7 @@ const Addcustomer = () => {
               <label for="formGroupExampleInput" className="fs-6 ">
                 Date
               </label>
-              <input type="date" class="form-control" />
+              <input type="date" class="form-control" value={currentdate}/>
             </div>
             <div class="col- col-md-6 col-sm-12">
               <label
@@ -140,7 +144,7 @@ const Addcustomer = () => {
               >
                 Time
               </label>
-              <input type="time" class="form-control" />
+              <input type="time" class="form-control" value={currenttime}/>
             </div>
           </div>
         </form>

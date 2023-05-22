@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import Navleft from './Components/Navleft';
 import Navtop from './Components/Navtop';
 import { useState } from 'react';
@@ -78,6 +78,9 @@ function App() {
           <div className="mcw">
             <Navtop side={setSidebar} sidebar={sidebar}/>
             <Routes>
+              <Route path='/login' element={<Login />} />
+              <Route path='/signup' element={<Signup />} />
+
               <Route path='/' element={<Dashboard />} />
               <Route path='/company' element={<Company />} />
               <Route path='/addcompany' element={<Addcompany />} />
@@ -89,13 +92,10 @@ function App() {
               <Route path="/viewvehicle" element={<Viewvehicle />} />
               <Route path="/editvehicle" element={<Editvehicle />} />
 
-
-
               <Route path="/driver" element={<Driver />} />
               <Route path="/viewdriver" element={<Viewdriver />} />
               <Route path="/adddriver" element={<Adddriver />} />
               <Route path="/editdriver" element={<Editdriver />} />
-
 
               <Route path="/customer" element={<Customer />} />
               <Route path="/viewcustomer" element={<Viewcustomer />} />
@@ -151,12 +151,9 @@ function App() {
               <Route path="/viewlead" element={<Viewlead />} />
               <Route path="/addlead" element={<Addlead />} />
               <Route path="/editlead" element={<Editlead />} />
-
-
-
             </Routes>
           </div>
-        </div>: <Login />}
+        </div>: <Signup />}
 
       </BrowserRouter>
     </div>

@@ -13,7 +13,6 @@ const Driverlist = () => {
           <Button name='Add' icon={<i class="fa-solid fa-plus p-1"></i>} link="/adddriver" className="float-end"/>
         </div>
       </div>
-
       <div className="row p-4">
         <table class="table mt-5">
           <thead>

@@ -12,7 +12,7 @@ const Viewvehicle = () => {
           <div className="col-6">
             <Button
               name="Back"
-              link="/company"
+              link="/vehicle"
               icon={<i class="fa-solid fa-arrow-left p-1"></i>}
             />
           </div>

@@ -3,6 +3,13 @@ import { Link } from "react-router-dom";
 import Button from "../../Components/Button";
 
 const Editdriver = () => {
+  
+  const d = new Date();
+  const currentdate = d.toISOString().substring(0,10);
+  const currenttime = d.toISOString().substring(11,16);
+
+  console.log(currenttime);
+
   return (
     <div class="container- px-3 mt-5">
       <div className="row p-4">
@@ -317,7 +324,7 @@ const Editdriver = () => {
               >
                 PunchInTime
               </label>
-              <input type="time" class="form-control" />
+              <input type="datetime-local" class="form-control" />
             </div>
             <div class="col- col-md-4 col-sm-12 mt-3">
               <label
@@ -326,7 +333,7 @@ const Editdriver = () => {
               >
                 PunchOutTime{" "}
               </label>
-              <input type="time" class="form-control" />
+              <input type="datetime-local" class="form-control" />
             </div>
           </div>
           <div class="row mt-4">
@@ -386,16 +393,7 @@ const Editdriver = () => {
               <label for="formGroupExampleInput" className="fs-6 ">
                 Date
               </label>
-              <input type="date" class="form-control" />
-            </div>
-            <div class="col- col-md-6 col-sm-12 mt-4">
-              <label
-                for="formGroupExampleInput"
-                className="fs-6 mt-sm-4 mt-md-0"
-              >
-                Time
-              </label>
-              <input type="time" class="form-control" />
+              <input type="datetime-local" class="form-control" id="date"/>
             </div>
           </div>
         </form>

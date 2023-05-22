@@ -2,17 +2,21 @@ import React from "react";
 import Button from "../../Components/Button";
 
 const Addadvancepayment = () => {
+  const d = new Date();
+  const currentdate = d.toISOString().substring(0,10);
+  const currenttime = d.toISOString().substring(11,16);
+
   return (
     <div class="container- px-3 mt-5">
       <div className="row p-4">
         <div className="col-6">
-          <h2>Add Advance Payment</h2>
+          <h2>Add AdvancePayment</h2>
         </div>
         <div className="col-6">
           <Button
             name="Back"
             icon={<i class="fa-solid fa-arrow-left"></i>}
-            link="/Advancepayment"
+            link="/advancepaymentlist"
           />
         </div>
       </div>
@@ -41,7 +45,7 @@ const Addadvancepayment = () => {
               >
                 Driver
               </label>
-              <input type="number" class="form-control" />
+              <input type="text" class="form-control" />
             </div>
           </div>
           <div class="row mt-4">
@@ -71,14 +75,14 @@ const Addadvancepayment = () => {
             </div>
           </div>
           <div class="row mt-5">
-            <h3>CreatedAt</h3>
+            <h3>CurrentAt</h3>
           </div>
           <div class="row mt-4">
             <div class="col- col-md-6 col-sm-12">
               <label for="formGroupExampleInput" className="fs-6 ">
                 Date
               </label>
-              <input type="date" class="form-control" />
+              <input type="date" class="form-control" value={currentdate} />
             </div>
             <div class="col- col-md-6 col-sm-12">
               <label
@@ -87,7 +91,7 @@ const Addadvancepayment = () => {
               >
                 Time
               </label>
-              <input type="time" class="form-control" />
+              <input type="time" class="form-control" value={currenttime} />
             </div>
           </div>
         </form>

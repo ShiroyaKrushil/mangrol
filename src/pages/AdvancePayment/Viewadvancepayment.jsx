@@ -3,7 +3,7 @@ import Button from "../../Components/Button";
 
 const Viewadvancepayment = () => {
   return (
-    <div class="container- px-3 mt-5">
+    <div className="container- px-3 mt-5">
       <div className="row p-4">
         <div className="col-6">
           <h2>Advance Payment Profile</h2>
@@ -12,7 +12,7 @@ const Viewadvancepayment = () => {
           <Button
             name="Back"
             link="/advancepayment"
-            icon={<i class="fa-solid fa-arrow-left p-1"></i>}
+            icon={<i className="fa-solid fa-arrow-left p-1"></i>}
           />
         </div>
       </div>
