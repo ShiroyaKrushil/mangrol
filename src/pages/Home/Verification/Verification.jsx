@@ -4,7 +4,7 @@ const Verification = () => {
   return (
     <>
         <section className="wrapper">
-		<div className="container">
+		<div className="container mt-5">
 			<div className="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3 text-center">
 				<form className="rounded bg-white shadow p-5">
 					<h3 className="text-dark fw-bolder fs-4 mb-2">Two Step Verification</h3>

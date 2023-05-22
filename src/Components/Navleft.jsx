@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Navleft = () => {
+const Navleft = (props) => {
+
   return (
     <div>
       <div className="container">
@@ -9,27 +10,26 @@ const Navleft = () => {
           <div class="dropdown-toggle-split">
             <i
               className="fa-solid fa-user fs-5 p-3 "
-              style={{ marginLeft: "200px", color: "white",cursor:'pointer' }}
+              style={{ marginLeft: "200px", color: "white", cursor: "pointer" }}
               data-toggle="dropdown"
               id="dropdownMenuButton"
             ></i>
             <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="#" onClick={props.logout}>
                 LogOut
               </a>
-              
             </div>
           </div>
         </div>
         <div className="row">
           <div className="col mt-5">
             <img
-              src={require("../assets/images/teacher-2.jpg")}
+              src={props.photoURL}
               className="p-img img-fluid"
             />
             <div className="row mt-3">
-              <h5 className="text-center sidebar-name">meera</h5>
-              <h6 className="text-center sidebar-email">meera@gmail.com</h6>
+              <h5 className="text-center sidebar-name">{props.displayName}</h5>
+              <h6 className="text-center sidebar-email">{props.email}</h6>
             </div>
           </div>
         </div>

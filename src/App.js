@@ -64,22 +64,62 @@ import Editlead from './pages/Lead/Editlead';
 import Login from './pages/Home/login/Login';
 import Signup from './pages/Home/signUp/Signup'
 
+import Verification from './pages/Home/Verification/Verification';
+
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
+import app from "./firebase/firebase.config";
+const googleprovider = new GoogleAuthProvider();
+const auth = getAuth(app);
+
 function App() {
   const [sidebar, setSidebar] = useState(true)
-  const auth = localStorage.getItem('user');
+
+  const [user, setUser] = useState(null);
+
+  const handlesignup = () => {
+    signInWithPopup(auth, googleprovider)
+      .then((result) => {
+        const loggeduser = result.user;
+        localStorage.setItem('user', loggeduser.email);
+
+        console.log(loggeduser);
+        setUser(loggeduser);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const logout = () => {
+    signOut(auth).then((result) => {
+      console.log(result)
+      setUser(null);
+    }).catch((error) => {
+      console.log(error);
+    });
+
+  }
+
   return (
     <div>
-      <BrowserRouter>{auth ?
+      <button type='button' onClick={handlesignup}>signUp</button>
+      <BrowserRouter>{user ?
         <div className={`main ${sidebar ? 'msb-x' : ''}`}>
           <div className="msb" id="msb">
-            <Navleft />
+            {
+              user && <Navleft email={user.email} displayName={user.displayName} photoURL={user.photoURL} logout={logout} />
+            }
           </div>
 
           <div className="mcw">
-            <Navtop side={setSidebar} sidebar={sidebar}/>
+            <Navtop side={setSidebar} sidebar={sidebar} />
             <Routes>
+              
               <Route path='/login' element={<Login />} />
               <Route path='/signup' element={<Signup />} />
+
+              <Route path='/verification' element={<Verification />} />
 
               <Route path='/' element={<Dashboard />} />
               <Route path='/company' element={<Company />} />
@@ -123,7 +163,7 @@ function App() {
               <Route path="/Edittaskcategory" element={<Edittaskcategory />} />
 
               <Route path="/task" element={<Task />} />
-              <Route path="/viewtask" element={<Viewtask/>} />
+              <Route path="/viewtask" element={<Viewtask />} />
               <Route path="/addtask" element={<Addtask />} />
               <Route path="/edittask" element={<Edittask />} />
 
@@ -131,7 +171,7 @@ function App() {
               <Route path="/viewexpensecategory" element={<Viewexpensecategory />} />
               <Route path="/addexpensecategory" element={<Addexpensecategory />} />
               <Route path="/editexpensecategory" element={<Editexpensecategory />} />
-              
+
               <Route path="/expense" element={<Expense />} />
               <Route path="/viewexpense" element={<Viewexpense />} />
               <Route path="/addexpense" element={<Addexpense />} />
@@ -141,7 +181,7 @@ function App() {
               <Route path="/viewsite" element={<Viewsite />} />
               <Route path="/addsite" element={<Addsite />} />
               <Route path="/editsite" element={<Editsite />} />
-              
+
               <Route path="/leadcategory" element={<Leadcategory />} />
               <Route path="/viewleadcategory" element={<Viewleadcategory />} />
               <Route path="/addleadcategory" element={<Addleadcategory />} />
@@ -153,7 +193,7 @@ function App() {
               <Route path="/editlead" element={<Editlead />} />
             </Routes>
           </div>
-        </div>: <Signup />}
+        </div> : <Signup />}
 
       </BrowserRouter>
     </div>
