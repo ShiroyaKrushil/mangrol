@@ -1,17 +1,38 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import Button from "../../../Components/Button";
+import { handlesignup } from "../../../firebase/firebase.config";
+import { api } from "../../../helper/api";
 
-const Signup = (props) => {
-  const [username, setUsername] = useState("");
+const Signup = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [cpassword, setCpassword] = useState("");
 
+  const navigate = useNavigate();
 
+  const Signupbtn = async (e) => {
+    e.preventDefault();
+    const registerType = "email";
+
+    let data = {
+      emailAddress: email,
+      phone: phone,
+      password: password,
+      registerType,
+    };
+
+    let response = await api("company/login/signup", data);
+    console.log(response);
+
+    if (response && response.status === 200) {
+      console.warn(response);
+      navigate("/verification");
+    }
+  };
 
   return (
     <section>
@@ -25,23 +46,7 @@ const Signup = (props) => {
                     <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4 mb-5">
                       Sign up
                     </p>
-                    <form className="">
-                      <div className="d-flex flex-row align-items-center mb-4">
-                        <div className="form-outline flex-fill mb-0">
-                          <label
-                            className="form-label"
-                            htmlFor="form3Example1c"
-                          >
-                            UserName
-                          </label>
-                          <input
-                            type="text"
-                            id="form3Example1c"
-                            className="form-control"
-                            onChange={(e) => setUsername(e.target.value)}
-                          />
-                        </div>
-                      </div>
+                    <form className="" method="POST">
                       <div className="d-flex flex-row align-items-center mb-4">
                         <div className="form-outline flex-fill mb-0">
                           <label
@@ -109,14 +114,14 @@ const Signup = (props) => {
                       </div>
 
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4 ">
-                        <Button name="Sign Up"/>
+                        <Button name="Sign Up" onclick={Signupbtn} />
                       </div>
                       <div className="text-center">OR</div>
                       <div className="gmail text-center mt-3">
                         <FcGoogle
                           fontSize={30}
                           style={{ cursor: "pointer" }}
-                          onClick={props.btn}
+                          onClick={handlesignup}
                         />
                       </div>
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">

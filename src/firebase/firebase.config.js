@@ -1,8 +1,8 @@
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth } from "firebase/auth";
+import { useHistory } from 'react-router-dom';
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCnS38YzWWS0kVNGNm2X-2gBUhbRnpHLYQ",
   authDomain: "trackbook-ffdf4.firebaseapp.com",
@@ -15,6 +15,19 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export default app;
+const googleprovider = new GoogleAuthProvider();
+export const auth = getAuth(app);
 
+
+export const handlesignup = (e) => {
+  e.preventDefault();
+  signInWithPopup(auth, googleprovider)
+    .then((result) => {
+      const loggeduser = result.user;
+      console.log(loggeduser);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 

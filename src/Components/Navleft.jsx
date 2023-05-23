@@ -24,12 +24,12 @@ const Navleft = (props) => {
         <div className="row">
           <div className="col mt-5">
             <img
-              src={props.photoURL}
+              src={require('../assets/images/teacher-2.jpg')}
               className="p-img img-fluid"
             />
             <div className="row mt-3">
-              <h5 className="text-center sidebar-name">{props.displayName}</h5>
-              <h6 className="text-center sidebar-email">{props.email}</h6>
+              <h5 className="text-center sidebar-name">kush</h5>
+              <h6 className="text-center sidebar-email">kush@gmail.com</h6>
             </div>
           </div>
         </div>
@@ -39,7 +39,7 @@ const Navleft = (props) => {
             <ul>
               <li className="link">
                 <i class="fa-solid fa-gauge"></i>
-                <Link to="/">Dashboard</Link>
+                <Link to="/dashboard">Dashboard</Link>
               </li>
               <li className="link">
                 <i class="fa-solid fa-building"></i>

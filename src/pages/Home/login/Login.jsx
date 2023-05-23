@@ -46,11 +46,12 @@ const Login = () => {
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4 ">
                         <Button name="Login" />
                       </div>
+                      
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                         <p>
                          Don`t have an account?
                           <Link
-                            to="/signup"
+                            to="/"
                             style={{ color: "blue" }}
                             className="fs-6 px-1"
                           >
