@@ -8,8 +8,10 @@ const Verification = () => {
   
   const navigate = useNavigate();
 
+  const user = localStorage.getItem("user");
+
     const data = {
-        emailAddress:'shiroyakrushil683@gmail.com',
+        emailAddress:user,
         verificationCode:code
     }
   
@@ -18,6 +20,8 @@ const Verification = () => {
     console.log(data)
     let response = await api("company/login/verify", data);
     console.log(response);
+
+    localStorage.clear("user");
 
     if (response && response.status === 200) {
       console.warn(response);

@@ -4,7 +4,9 @@ import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import Button from "../../../Components/Button";
 import { handlesignup } from "../../../firebase/firebase.config";
+import { resetError, showError } from "../../../helper/error";
 import { api } from "../../../helper/api";
+import Joi from "joi";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -13,11 +15,19 @@ const Signup = () => {
   const [cpassword, setCpassword] = useState("");
 
   const navigate = useNavigate();
+ 
+  const validate = (data) => {
+    const schema = Joi.object({
+      emailAddress: Joi.string().max(100).required(),
+      phone:Joi.string().max(10).required(),
+      password: Joi.string().max(8).required()
+    });
+    return schema.validate(data, { abortEarly: false, allowUnknown: true });
+  };
 
-  const Signupbtn = async (e) => {
-    e.preventDefault();
+  const Signupbtn = async () => {
+    resetError();
     const registerType = "email";
-
     let data = {
       emailAddress: email,
       phone: phone,
@@ -25,11 +35,15 @@ const Signup = () => {
       registerType,
     };
 
+    const { error } = validate(data);
+    if (error) showError(error.details);
+
     let response = await api("company/login/signup", data);
     console.log(response);
 
     if (response && response.status === 200) {
       console.warn(response);
+      localStorage.setItem("user",data.emailAddress);
       navigate("/verification");
     }
   };

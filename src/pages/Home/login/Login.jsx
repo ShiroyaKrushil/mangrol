@@ -1,8 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../../Components/Button";
+import { api } from "../../../helper/api";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({loginHandler}) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const registerType = "email";
+
+  let data = {
+    emailAddress:email,
+    password:password,
+    registerType,
+
+  };
+
+  const login = async (e) => {
+    e.preventDefault();
+
+    let response = await api("/company/login/login", data);
+    console.log(response);
+
+    if (response && response.status === 200) {
+      console.warn(response);
+      loginHandler(true);
+      localStorage.setItem('username', data.emailAddress);
+
+      navigate("/dashboard");
+    }
+  };
+
   return (
     <section className="">
       <div className="container pt-5 ">
@@ -26,6 +55,7 @@ const Login = () => {
                             type="email"
                             id="form3Example4c"
                             className="form-control"
+                            onChange={(e) => setEmail(e.target.value)}
                           />
                         </div>
                       </div>
@@ -39,17 +69,18 @@ const Login = () => {
                             type="password"
                             id="form3Example4cd"
                             className="form-control"
+                            onChange={(e) => setPassword(e.target.value)}
                           />
                         </div>
                       </div>
 
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4 ">
-                        <Button name="Login" />
+                        <Button name="Login" onclick={login}/>
                       </div>
-                      
+
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                         <p>
-                         Don`t have an account?
+                          Don`t have an account?
                           <Link
                             to="/"
                             style={{ color: "blue" }}

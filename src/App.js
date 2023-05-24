@@ -95,9 +95,7 @@ function App() {
           <div className="mcw">
             <Navtop side={setSidebar} sidebar={sidebar} />
             <Routes>
-
-
-              <Route path='/' element={<Dashboard />} />
+              <Route path='/dashboard' element={<Dashboard />} />
               <Route path='/company' element={<Company />} />
               <Route path='/addcompany' element={<Addcompany />} />
               <Route path='/viewcompany' element={<Viewcompany />} />
