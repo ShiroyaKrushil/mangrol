@@ -2,25 +2,29 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import Button from "../../../Components/Button";
-import { handlesignup } from "../../../firebase/firebase.config";
-import { resetError, showError } from "../../../helper/error";
-import { api } from "../../../helper/api";
+import Button from "../../Components/Button";
+import { resetError, showError } from "../../helper/error";
+import { api } from "../../helper/api";
 import Joi from "joi";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth } from "firebase/auth";
+import { app } from "../../firebase/firebase.config";
+
+const googleprovider = new GoogleAuthProvider();
+const auth = getAuth(app);
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [cpassword, setCpassword] = useState("");
-
   const navigate = useNavigate();
- 
+
   const validate = (data) => {
     const schema = Joi.object({
       emailAddress: Joi.string().max(100).required(),
-      phone:Joi.string().max(10).required(),
-      password: Joi.string().max(8).required()
+      phone: Joi.string().max(10).required(),
+      password: Joi.string().max(8).required(),
     });
     return schema.validate(data, { abortEarly: false, allowUnknown: true });
   };
@@ -43,9 +47,20 @@ const Signup = () => {
 
     if (response && response.status === 200) {
       console.warn(response);
-      localStorage.setItem("user",data.emailAddress);
+      localStorage.setItem("user", data.emailAddress);
       navigate("/verification");
     }
+  };
+
+  const handlesignup =  () => {
+    signInWithPopup(auth, googleprovider)
+      .then((result) => {
+        const loggeduser = result.user;
+        console.log(loggeduser);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -73,7 +88,9 @@ const Signup = () => {
                             type="email"
                             id="form3Example4c"
                             className="form-control"
+                            value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            autoFocus
                           />
                         </div>
                       </div>
@@ -90,6 +107,7 @@ const Signup = () => {
                             type="number"
                             id="form3Example4cd"
                             className="form-control"
+                            value={phone}
                             onChange={(e) => setPhone(e.target.value)}
                           />
                         </div>
@@ -106,6 +124,7 @@ const Signup = () => {
                             type="password"
                             id="form3Example4cd1"
                             className="form-control"
+                            value={password}
                             onChange={(e) => setPassword(e.target.value)}
                           />
                         </div>
@@ -122,6 +141,7 @@ const Signup = () => {
                             type="password"
                             id="form3Example4cd2"
                             className="form-control"
+                            value={cpassword}
                             onChange={(e) => setCpassword(e.target.value)}
                           />
                         </div>
@@ -130,8 +150,12 @@ const Signup = () => {
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4 ">
                         <Button name="Sign Up" onclick={Signupbtn} />
                       </div>
-                      <div className="text-center">OR</div>
-                      <div className="gmail text-center mt-3">
+                      <div className="text-center">
+                        <span style={{ opacity: "0.2", fontSize: "15px" }}>
+                          ----------------------- OR -----------------------
+                        </span>
+                      </div>
+                      <div className="gmail text-center mt-3 mb-3">
                         <FcGoogle
                           fontSize={30}
                           style={{ cursor: "pointer" }}

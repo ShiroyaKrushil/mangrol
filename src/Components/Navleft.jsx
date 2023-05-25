@@ -1,7 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Navleft = (props) => {
+const Navleft = () => {
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.clear();
+    navigate("./login");
+    window.location.reload();
+  };
 
   return (
     <div>
@@ -15,7 +21,7 @@ const Navleft = (props) => {
               id="dropdownMenuButton"
             ></i>
             <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#" onClick={props.logout}>
+              <a class="dropdown-item" href="#" onClick={logout}>
                 LogOut
               </a>
             </div>
@@ -24,7 +30,7 @@ const Navleft = (props) => {
         <div className="row">
           <div className="col mt-5">
             <img
-              src={require('../assets/images/teacher-2.jpg')}
+              src={require("../assets/images/teacher-2.jpg")}
               className="p-img img-fluid"
             />
             <div className="row mt-3">
@@ -39,7 +45,7 @@ const Navleft = (props) => {
             <ul>
               <li className="link">
                 <i class="fa-solid fa-gauge"></i>
-                <Link to="/dashboard">Dashboard</Link>
+                <Link to="/home">Dashboard</Link>
               </li>
               <li className="link">
                 <i class="fa-solid fa-building"></i>

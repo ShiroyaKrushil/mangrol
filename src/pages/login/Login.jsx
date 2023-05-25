@@ -1,40 +1,96 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import Button from "../../../Components/Button";
-import { api } from "../../../helper/api";
+import React, { useEffect, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
+import Button from "../../Components/Button";
+import { api } from "../../helper/api";
 import { useNavigate } from "react-router-dom";
+import Joi from "joi";
+import { resetError, showError } from "../../helper/error";
+import { FcGoogle } from "react-icons/fc";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth } from "firebase/auth";
+import { app, messaging } from "../../firebase/firebase.config";
+import { getToken } from "firebase/messaging";
 
-const Login = ({loginHandler}) => {
+const googleprovider = new GoogleAuthProvider();
+const auth = getAuth(app);
+
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const registerType = "email";
 
-  let data = {
-    emailAddress:email,
-    password:password,
-    registerType,
-
+  const validate = (data) => {
+    const schema = Joi.object({
+      email: Joi.string().max(100).required().label("Name"),
+      password: Joi.string().max(8).required().label("Password"),
+    });
+    return schema.validate(data, { abortEarly: false, allowUnknown: true });
   };
 
-  const login = async (e) => {
-    e.preventDefault();
+  const [fcmToken, setFcmToken] = useState("");
 
-    let response = await api("/company/login/login", data);
-    console.log(response);
-
-    if (response && response.status === 200) {
-      console.warn(response);
-      loginHandler(true);
-      localStorage.setItem('username', data.emailAddress);
-
-      navigate("/dashboard");
+  const requestPermission = async () => {
+    const permission = await Notification.requestPermission();
+    if (permission === "granted") {
+      const token = await getToken(messaging, {
+        vapidKey:
+          "BCxlm15cl_topmn7Qvq_We5bzjn4fRdEQY7VZuBS0E2mPn2Y3vQyvqTTfRdTIPh4S5UKQGislMX6gttQ-uJ04Ts",
+      });
+      setFcmToken(token);
     }
+  };
+  requestPermission();
+
+  const login = async () => {
+    resetError();
+    let data = {
+      registerType: "email",
+      emailAddress: email,
+      password: password,
+      fcmToken,
+    };
+
+    const { error } = validate(data);
+    if (error) showError(error.details);
+
+    let response = await api("company/login/login", data);
+    console.log(response);
+    if (response && response.status === 200) {
+      
+      localStorage.setItem('token',JSON.stringify(data))
+      navigate('/home');
+      window.location.reload();
+
+    } else {
+     
+    }
+  };
+
+  const handlelogin = (e) => {
+    e.preventDefault();
+    signInWithPopup(auth, googleprovider)
+      .then((result) => {
+        const loggeduser = result.user;
+        localStorage.getItem("uid");
+        console.log(loggeduser);
+        navigate("./home");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
     <section className="">
-      <div className="container pt-5 ">
+      <div
+        className="container"
+        style={{
+          position: "absolute",
+          top: " 50%",
+          left: "50%",
+          transform: "translate(-50%,-50%)",
+        }}
+      >
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-lg-12 col-xl-11 ">
             <div className="card text-black " style={{ borderradius: " 25px" }}>
@@ -56,11 +112,12 @@ const Login = ({loginHandler}) => {
                             id="form3Example4c"
                             className="form-control"
                             onChange={(e) => setEmail(e.target.value)}
+                            autoFocus
                           />
                         </div>
                       </div>
 
-                      <div className="d-flex flex-row align-items-center mb-4">
+                      <div className="d-flex flex-row align-items-center mb-5">
                         <div className="form-outline flex-fill mb-0">
                           <label className="form-label" for="form3Example4cd">
                             Password
@@ -75,9 +132,16 @@ const Login = ({loginHandler}) => {
                       </div>
 
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4 ">
-                        <Button name="Login" onclick={login}/>
+                        <Button name="Login" onclick={login} />
                       </div>
-
+                      <div className="text-center"><span style={{opacity:'0.2',fontSize:'15px'}}>------------------------ OR ------------------------</span></div>
+                      <div className="gmail text-center mt-3 mb-3">
+                        <FcGoogle
+                          fontSize={30}
+                          style={{ cursor: "pointer" }}
+                          onClick={handlelogin}
+                        />
+                      </div>
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                         <p>
                           Don`t have an account?

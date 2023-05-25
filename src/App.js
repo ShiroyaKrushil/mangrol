@@ -8,6 +8,7 @@ import Vehicle from './pages/Vehicle/Vehicle';
 import Driver from './pages/Driver/Driver';
 import Customer from './pages/Customer/Customer';
 import Dashboard from './pages/Home/Dashboard';
+import Home from './pages/Home/Dashboard';
 import Advancepayment from './pages/AdvancePayment/Advancepayment';
 import Driverattendance from './pages/DriverAttendance/Driverattendance';
 import Drivergeolocation from './pages/DriverGeoLocation/Drivergeolocation';
@@ -61,16 +62,16 @@ import Viewlead from './pages/Lead/Viewlead';
 import Addlead from './pages/Lead/Addlead';
 import Editlead from './pages/Lead/Editlead';
 
-import Login from './pages/Home/login/Login';
-import Signup from './pages/Home/signUp/Signup'
+import Login from './pages/login/Login';
+import Signup from './pages/signUp/Signup'
 
-import Verification from './pages/Home/Verification/Verification';
-
+import Verification from './pages/Verification/Verification';
 
 function App() {
   const [sidebar, setSidebar] = useState(true)
 
   const [isLogin, setIsLogin] = useState();
+  
 
   useEffect(() => {
     setIsLogin(localStorage.getItem('token') && localStorage.getItem('token') != null ? true : false);
@@ -95,7 +96,7 @@ function App() {
           <div className="mcw">
             <Navtop side={setSidebar} sidebar={sidebar} />
             <Routes>
-              <Route path='/dashboard' element={<Dashboard />} />
+              <Route path='/home' element={<Home />} />
               <Route path='/company' element={<Company />} />
               <Route path='/addcompany' element={<Addcompany />} />
               <Route path='/viewcompany' element={<Viewcompany />} />

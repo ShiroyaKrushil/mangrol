@@ -1,7 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getAuth } from "firebase/auth";
-import { useHistory } from 'react-router-dom';
+import { getMessaging } from "firebase/messaging";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCnS38YzWWS0kVNGNm2X-2gBUhbRnpHLYQ",
@@ -13,21 +11,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 
-const googleprovider = new GoogleAuthProvider();
-export const auth = getAuth(app);
+// export default app
 
-
-export const handlesignup = (e) => {
-  e.preventDefault();
-  signInWithPopup(auth, googleprovider)
-    .then((result) => {
-      const loggeduser = result.user;
-      console.log(loggeduser);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
+export const messaging = getMessaging(app)
