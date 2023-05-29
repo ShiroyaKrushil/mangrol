@@ -8,8 +8,7 @@ import { resetError, showError } from "../../helper/error";
 import { FcGoogle } from "react-icons/fc";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { getAuth } from "firebase/auth";
-import { app, messaging } from "../../firebase/firebase.config";
-import { getToken } from "firebase/messaging";
+import { app } from "../../firebase/firebase.config";
 
 const googleprovider = new GoogleAuthProvider();
 const auth = getAuth(app);
@@ -27,42 +26,21 @@ const Login = () => {
     return schema.validate(data, { abortEarly: false, allowUnknown: true });
   };
 
-  const [fcmToken, setFcmToken] = useState("");
-
-  const requestPermission = async () => {
-    const permission = await Notification.requestPermission();
-    if (permission === "granted") {
-      const token = await getToken(messaging, {
-        vapidKey:
-          "BCxlm15cl_topmn7Qvq_We5bzjn4fRdEQY7VZuBS0E2mPn2Y3vQyvqTTfRdTIPh4S5UKQGislMX6gttQ-uJ04Ts",
-      });
-      setFcmToken(token);
-    }
-  };
-  requestPermission();
-
-  const login = async () => {
-    resetError();
+  const login = async (e) => {
+    e.preventDefault();
     let data = {
-      registerType: "email",
-      emailAddress: email,
-      password: password,
-      fcmToken,
+      username: email,
+      password: password
     };
-
-    const { error } = validate(data);
-    if (error) showError(error.details);
-
-    let response = await api("company/login/login", data);
+    let response = await api("auth/", data);
     console.log(response);
     if (response && response.status === 200) {
-      
-      localStorage.setItem('token',JSON.stringify(data))
-      navigate('/home');
+      // localStorage.setItem('token',data.emailAddress)
+      // navigate('/home');
+      navigate('/dashboard')
       window.location.reload();
 
     } else {
-     
     }
   };
 
@@ -73,7 +51,7 @@ const Login = () => {
         const loggeduser = result.user;
         localStorage.getItem("uid");
         console.log(loggeduser);
-        navigate("./home");
+        navigate("/dashboard");
       })
       .catch((err) => {
         console.log(err);
@@ -142,7 +120,7 @@ const Login = () => {
                           onClick={handlelogin}
                         />
                       </div>
-                      <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                      {/* <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                         <p>
                           Don`t have an account?
                           <Link
@@ -153,7 +131,7 @@ const Login = () => {
                             Sign Up
                           </Link>
                         </p>
-                      </div>
+                      </div> */}
                     </form>
                   </div>
                   <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">

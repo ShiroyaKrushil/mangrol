@@ -1,54 +1,75 @@
 import React from "react";
+import { api } from "../../helper/api";
+import { useState, useEffect } from "react";
 
 const Dashboard = () => {
+  const [district, setDistrict] = useState([]);
+
+
+  const District = async () => {
+    let response = await api("master/district");
+    if (response && response.status === 200) {
+      setDistrict(response.data.total_records);
+    } else {
+      alert("error");
+    }
+  };
+
+  
+
+  useEffect(() => {
+    District();
+
+  }, []);
+
   return (
     <div>
       <div className="container-fluid py-5">
         <div className="row">
           <div className="row d-flex justify-content-center text-center">
             <div className="col-md-3 col-sm-4 py-5 m-3 box ">
-              <p className="text-center">Company</p>
-              <span className="span text-center">10</span>
+              <p className="text-center">District</p>
+              {<span className="span text-center">{district}</span>}
             </div>
             <div className="col-md-3 col-sm-4 py-5 m-3 box">
-              <p className="text-center">Vehicle</p>
-              <span className="span text-center">50</span>
+              <p className="text-center">business_type</p>
+              <span className="span text-center">0</span>
             </div>
             <div className="col-md-3 col-sm-4 py-5 m-3 box">
               <p className="text-center">Driver</p>
-              <span className="span text-center">50</span>
+              <span className="span text-center">0</span>
             </div>
             <div className="col-md-3 col-sm-4 py-5 m-3 box">
               <p className="text-center">Customer</p>
-              <span className="span text-center">100</span>
+              <span className="span text-center">0</span>
             </div>
             <div className="col-md-3 col-sm-4 py-5 m-3 box">
               <p className="text-center">Task</p>
-              <span className="span text-center">5</span>
+              <span className="span text-center">0</span>
             </div>
             <div className="col-md-3 col-sm-4 py-5 m-3 box">
               <p className="text-center">TaskCategory</p>
-              <span className="span text-center">5</span>
+              <span className="span text-center">0</span>
             </div>
             <div className="col-md-3 col-sm-4 py-5 m-3 box">
               <p className="text-center">Lead</p>
-              <span className="span text-center">5</span>
+              <span className="span text-center">0</span>
             </div>
             <div className="col-md-3 col-sm-4 py-5 m-3 box">
               <p className="text-center">LeadCategory</p>
-              <span className="span text-center">5</span>
+              <span className="span text-center">0</span>
             </div>
             <div className="col-md-3 col-sm-4 py-5 m-3 box">
               <p className="text-center">Expense</p>
-              <span className="span text-center">10</span>
+              <span className="span text-center">0</span>
             </div>
             <div className="col-md-3 col-sm-4 py-5 m-3 box">
               <p className="text-center">ExpenseCategory</p>
-              <span className="span text-center">10</span>
+              <span className="span text-center">0</span>
             </div>
             <div className="col-md-3 col-sm-4 py-5 m-3 box">
               <p className="text-center">Site</p>
-              <span className="span text-center">25</span>
+              <span className="span text-center">0</span>
             </div>
           </div>
         </div>

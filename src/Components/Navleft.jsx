@@ -5,9 +5,11 @@ const Navleft = () => {
   const navigate = useNavigate();
   const logout = () => {
     localStorage.clear();
-    navigate("./login");
-    window.location.reload();
+    navigate("/");
+    window.location.reload(false);
   };
+
+  const user = localStorage.getItem("token")
 
   return (
     <div>
@@ -35,7 +37,7 @@ const Navleft = () => {
             />
             <div className="row mt-3">
               <h5 className="text-center sidebar-name">kush</h5>
-              <h6 className="text-center sidebar-email">kush@gmail.com</h6>
+              <h6 className="text-center sidebar-email">{user}</h6>
             </div>
           </div>
         </div>
@@ -45,7 +47,7 @@ const Navleft = () => {
             <ul>
               <li className="link">
                 <i class="fa-solid fa-gauge"></i>
-                <Link to="/home">Dashboard</Link>
+                <Link to="/">Dashboard</Link>
               </li>
               <li className="link">
                 <i class="fa-solid fa-building"></i>
@@ -53,7 +55,7 @@ const Navleft = () => {
               </li>
               <li className="link">
                 <i class="fa-solid fa-truck"></i>
-                <Link to="/Vehicle">Vehicle</Link>
+                <Link to="/districtlist">District</Link>
               </li>
               <li className="link">
                 <i class="fa-solid fa-id-card"></i>
