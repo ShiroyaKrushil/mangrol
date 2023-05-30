@@ -1,52 +1,16 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import Button from "../../Components/Button";
-import { api } from "../../helper/api";
 import Footer from "../../Components/Footer_two";
+import { api } from "../../helper/api";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { resetError, showError } from "../../helper/error";
 import Joi from "joi";
 
-const Addvehicle = () => {
+const Addzone = () => {
   const [name, setName] = useState("");
-  let [error, setError] = useState({});
-
   const navigate = useNavigate();
-
-  let districtname = [
-    "Ahmedabad",
-    "Amreli",
-    "Anand",
-    "Aravalli",
-    "Banaskantha",
-    "Bharuch",
-    "Bhavnagar",
-    "Botad",
-    "Chhota Udaipur",
-    "Dahod",
-    "Dang",
-    "Devbhoomi Dwarka",
-    "Gandhinagar",
-    "Gir Somnath",
-    "Jamnagar",
-    "Junagadh",
-    "Kheda",
-    "Kutch",
-    "Mahisagar",
-    "Mehsana",
-    "Morbi",
-    "Narmada",
-    "Navsari",
-    "Panchmahal",
-    "Patan",
-    "Porbandar",
-    "Rajkot",
-    "Sabarkantha",
-    "Surat",
-    "Surendranagar",
-    "Tapi",
-    "Vadodara",
-    "Valsad",
-  ];
+  let [error, setError] = useState({});
 
   const validate = (data) => {
     const schema = Joi.object({
@@ -60,34 +24,31 @@ const Addvehicle = () => {
     let data = {
       name: name,
     };
-
     const { error } = validate(data);
     if (error) return showError(error.details);
 
-    let response = await api("master/district/add", data);
+    let response = await api("master/zone/add", data);
     console.log(response);
     if (response && response.status === 200) {
-      setName('');
-    } else {
-      alert("error");
+      setName("");
     }
   };
 
-  const canclehandler = () => {
-    navigate("/districtlist");
+  const cancleHandler = () => {
+    navigate("/zonelist");
   };
 
   return (
     <div class="container- px-3 mt-5">
       <div className="row p-4">
         <div className="col-6">
-          <h2>Add District</h2>
+          <h2>Add Zone</h2>
         </div>
         <div className="col-6">
           <Button
             name="Back"
             icon={<i class="fa-solid fa-arrow-left"></i>}
-            link="/districtlist"
+            link="/zonelist"
           />
         </div>
       </div>
@@ -98,28 +59,21 @@ const Addvehicle = () => {
               <label for="formGroupExampleInput" className="fs-6">
                 Name
               </label>
-              <select
-                name=""
+              <input
+                type="text"
                 id="name"
-                className="form-select"
+                className="form-control"
+                autoFocus
                 onChange={(e) => setName(e.target.value)}
                 value={name}
-              >
-                <option value="" disabled>
-                  Select District
-                </option>
-                {districtname.map((name) => {
-                  return <option value={name}>{name}</option>;
-                })}
-              </select>
-              {error?.name && <span className="error">{error["name"]}</span>}
+              />
             </div>
           </div>
         </form>
-        <Footer add={saveHandler} cancle={canclehandler} />
+        <Footer add={saveHandler} cancle={cancleHandler} />
       </div>
     </div>
   );
 };
 
-export default Addvehicle;
+export default Addzone;

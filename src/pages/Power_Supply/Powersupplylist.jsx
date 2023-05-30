@@ -11,13 +11,13 @@ import {
 import { RiCloseCircleFill } from "react-icons/ri";
 import { HiCheckCircle } from "react-icons/hi";
 
-const VehicleList = () => {
+const Powersupplylist = () => {
   let queryParams = new URLSearchParams(window.location.search);
 
   let params = queryParams.get("page_no");
   let initialPage = parseInt(params);
 
-  const [district, setDistrict] = useState([]);
+  const [powersupply, setPowersupply] = useState([]);
   const [totalRecods, setTotalRecods] = useState(0);
   let [sort_by, setSort_by] = useState("");
   let [sort_type, setSort_type] = useState(-1);
@@ -42,13 +42,13 @@ const VehicleList = () => {
       status: status,
     };
 
-    let response = await api("master/district", data);
+    let response = await api("master/power_supply", data);
     console.log(response.data.data);
     if (response && response.status === 200) {
       if (response?.data?.total_records) {
         setTotalRecods(response?.data?.total_records);
       }
-      setDistrict(response.data.data);
+      setPowersupply(response.data.data);
     } else {
       alert("error");
     }
@@ -70,25 +70,14 @@ const VehicleList = () => {
       status: !item.status,
     };
 
-    const response = await api("master/district/status", data);
+    const response = await api("master/power_supply/status", data);
     if (response && response.status === 200) {
       setStatus("");
       loaddata();
     }
   };
 
-  const statusHandler = async () => {
-    let data = {
-      _id: id,
-      status: !status,
-    };
-
-    const response = await api("master/district/status", data);
-    if (response && response.status === 200) {
-      setStatus("");
-      loaddata();
-    }
-  };
+ 
 
   const sortingHandler = (key) => {
     if (sort_by === key) {
@@ -116,18 +105,17 @@ const VehicleList = () => {
     setCurrentPage(currentPage);
     loaddata(!!params ? params : 1);
   }, [recordPerPage]);
-
   return (
     <div className="container- px-3 mt-5">
       <div className="row p-4">
         <div className="col-6">
-          <h2>District List</h2>
+          <h2>Power Supply List</h2>
         </div>
         <div className="col-6">
           <Button
             name="Add"
             icon={<i class="fa-solid fa-plus p-1"></i>}
-            link="/adddistrict"
+            link="/addpowersupply"
             className="float-end"
           />
         </div>
@@ -139,7 +127,7 @@ const VehicleList = () => {
             <tr className="text-center  fs-6">
               <th scope="col">#</th>
               <th scope="col">
-                District
+                Name
                 <button
                   onClick={() => sortingHandler("name")}
                   style={{ border: "none", background: "none" }}
@@ -160,7 +148,7 @@ const VehicleList = () => {
             </tr>
           </thead>
           <tbody>
-            {district.map((item, index) => {
+            {powersupply.map((item, index) => {
               return (
                 <>
                   <tr className="text-center fs-6" key={index}>
@@ -170,7 +158,7 @@ const VehicleList = () => {
                       <button className="fs-5" style={{border:'none',background:'none'}} onClick={() => editHandler(item)}>{item.status === true ? <HiCheckCircle className='focus:outline-none text-green-700 text-lg' /> : <RiCloseCircleFill className='focus:outline-none text-red-700 text-lg' />}</button>
                     </td>
                     <td>
-                      <Link to={`/viewdistrict/${item._id}`}>
+                      <Link to={`/viewpowersupply/${item._id}`}>
                         <i class="fa-sharp fa-solid fa-eye text-black"></i>
                       </Link>
                     </td>
@@ -191,4 +179,4 @@ const VehicleList = () => {
   );
 };
 
-export default VehicleList;
+export default Powersupplylist;

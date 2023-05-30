@@ -46,65 +46,33 @@ const Navleft = () => {
           <div className="sidebar-link">
             <ul>
               <li className="link">
-                <i class="fa-solid fa-gauge"></i>
                 <Link to="/">Dashboard</Link>
               </li>
               <li className="link">
-                <i class="fa-solid fa-building"></i>
-                <Link to="/company">Company</Link>
+                <Link to="/memberlist">Member</Link>
               </li>
               <li className="link">
-                <i class="fa-solid fa-truck"></i>
                 <Link to="/districtlist">District</Link>
               </li>
               <li className="link">
-                <i class="fa-solid fa-id-card"></i>
-                <Link to="/driver">Driver</Link>
+                <Link to="/talukalist">Taluka</Link>
               </li>
               <li className="link">
-                <i class="fa-solid fa-clipboard-user"></i>
-                <Link to="/driverAttendance">DriverAttendance</Link>
+                <Link to="/zonelist">Zone</Link>
               </li>
               <li className="link">
-                <i class="fa-solid fa-location-crosshairs"></i>
-                <Link to="/driverGeoLocation">DriverGeoLocation</Link>
+                <Link to="/businesstypelist">Business Type</Link>
               </li>
               <li className="link">
-                <i class="fa-solid fa-person"></i>
-                <Link to="/customer">Customer</Link>
+                <Link to="/powersupplylist">Power Supply</Link>
               </li>
               <li className="link">
-                <i class="fa-regular fa-credit-card"></i>
-                <Link to="/advancePayment">AdvancePayment</Link>
+                <Link to="/associationlist">Association</Link>
               </li>
               <li className="link">
-                <i class="fa-solid fa-person"></i>
-                <Link to="/taskCategory">TaskCategory</Link>
+                <Link to="/userlist">User</Link>
               </li>
-              <li className="link">
-                <i class="fa-solid fa-list-check"></i>
-                <Link to="/task">Task</Link>
-              </li>
-              <li className="link">
-                <i class="fa-solid fa-person"></i>
-                <Link to="/expenseCategory">ExpenseCategory</Link>
-              </li>
-              <li className="link">
-                <i class="fa-solid fa-person"></i>
-                <Link to="/expense">Expense</Link>
-              </li>
-              <li className="link">
-                <i class="fa-solid fa-person"></i>
-                <Link to="/site">Site</Link>
-              </li>
-              <li className="link">
-                <i class="fa-solid fa-person"></i>
-                <Link to="/leadCategory">LeadCategory</Link>
-              </li>
-              <li className="link">
-                <i class="fa-solid fa-person"></i>
-                <Link to="/lead">Lead</Link>
-              </li>
+             
             </ul>
           </div>
         </div>

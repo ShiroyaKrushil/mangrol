@@ -6,19 +6,20 @@ import Footer from "../../Components/Footer";
 import { TfiCheckBox } from "react-icons/tfi";
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
 
-const Viewvehicle = () => {
-  const [district, setDistrict] = useState([]);
+const Viewsite = () => {
+
+  const [zone, setZone] = useState([]);
   const parms = useParams();
   const navigate = useNavigate();
 
-  const deletedistrict = async () => {
+  const deletezone = async () => {
     const data = {
       _id: parms.id,
     };
 
-    let response = await api("master/district/delete", data);
+    let response = await api("master/zone/delete", data);
     if (response && response.status === 200) {
-      navigate("/districtlist");
+      navigate("/zonelist");
     } else {
       alert("error");
     }
@@ -30,32 +31,32 @@ const Viewvehicle = () => {
         _id: parms.id,
       };
 
-      const response = await api("master/district/view", data);
+      const response = await api("master/zone/view", data);
 
       if (response && response.status === 200) {
-        setDistrict(response.data.data);
+        setZone(response.data.data);
       }
     };
     fetchdata();
   }, []);
 
+
   return (
-    <>
-      <div class="container- px-3 mt-5">
+    <div class="container- px-3 mt-5">
         <div className="row p-4">
           <div className="col-6">
-            <h2>View District</h2>
+            <h2>View Zone</h2>
           </div>
           <div className="col-6">
             <Button
               name="Edit"
-              link={`/editdistrict/${parms.id}`}
+              link={`/editzone/${parms.id}`}
               icon={<i class="fa-regular fa-pen-to-square p-1"></i>}
               style={{ marginLeft: "20px" }}
             />
             <Button
               name="Back"
-              link="/districtlist"
+              link="/zonelist"
               icon={<i class="fa-solid fa-arrow-left p-1"></i>}
             />
           </div>
@@ -67,25 +68,24 @@ const Viewvehicle = () => {
                     className="text-center"
                     style={{ color: "black", fontWeight: "bold" }}
                   >
-                    District Name
+                    Zone Name
                   </p>
-                  {<span className="span text-center">{district.name}</span>}
+                  {<span className="span text-center">{zone.name}</span>}
                   <p
                     className="text-center"
                     style={{ color: "black", fontWeight: "bold",marginTop:'20px' }}
                   >
                     Status
                   </p>
-                  {district.status === true ? <TfiCheckBox className='text-lg font-extrabold' /> : <MdCheckBoxOutlineBlank />}
+                  {zone.status === true ? <TfiCheckBox className='text-lg font-extrabold' /> : <MdCheckBoxOutlineBlank />}
                 </div>
               </div>
             </div>
           </div>
-          <Footer delete={deletedistrict} />
+          <Footer delete={deletezone} />
         </div>
       </div>
-    </>
-  );
-};
+  )
+}
 
-export default Viewvehicle;
+export default Viewsite

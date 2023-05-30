@@ -1,6 +1,5 @@
 import React from "react";
-import Pagination from "react-bootstrap/Pagination";
-
+import ReactPaginate from 'react-paginate';
 export default function pagination({
   onPaginationChange,
   recordPerPage,
@@ -8,34 +7,46 @@ export default function pagination({
   currentPage,
   setRecordPerPage,
 }) {
+  console.log(recordPerPage);
   return (
     <>
       <div>
-        <div>
-          <Pagination
-            className="float-end"
+        <nav
+          className="setPagination flex items-center gap-3 float-end d-flex"
+          aria-label="Page navigation example"
+        >
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel=">"
             onPageChange={(e) => onPaginationChange(e)}
-          >
-            {console.log(2222,pageCount)}
-            <Pagination.Prev initialPage={currentPage - 1} />
-            <Pagination.Item>{pageCount}</Pagination.Item>
-            <Pagination.Next initialPage={currentPage + 1} />
-          </Pagination>
-        </div>
-        <div className="pagination_page">
-          <select
-            id="countries"
-            className="float-end form-select"
-            value={recordPerPage}
-            onChange={(e) => setRecordPerPage(e.target.value)}
-            style={{ width: "70px", height: "50px", marginRight: "10px" }}
-          >
-            <option value={10}>10</option>
-            <option value={25}>25</option>
-            <option value={50}>50</option>
-            <option value={100}>100</option>
-          </select>
-        </div>
+            pageRangeDisplayed={2}
+            pageCount={pageCount}
+            initialPage={currentPage - 1}
+            previousLabel="<"
+            renderOnZeroPageCount={null}
+            containerClassName={"pagination"}
+            pageClassName={"page-item"}
+            pageLinkClassName={"page-link"}
+            previousClassName={"page-item"}
+            previousLinkClassName={"page-link"}
+            nextClassName={"page-item"}
+            nextLinkClassName={"page-link"}
+            activeClassName={"active"}
+          />
+          <div className="pagination_page">
+            <select
+              id="countries"
+              className="form-select"
+              value={recordPerPage}
+              onChange={(e) => setRecordPerPage(e.target.value)}
+            >
+              <option value={10}>10</option>
+              <option value={25}>25</option>
+              <option value={50}>50</option>
+              <option value={100}>100</option>
+            </select>
+          </div>
+        </nav>
       </div>
     </>
   );

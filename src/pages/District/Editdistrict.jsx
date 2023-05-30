@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
-import {useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../Components/Button";
 import { api } from "../../helper/api";
 import Footer from "../../Components/Footer_two";
+import { resetError, showError } from "../../helper/error";
+import Joi from "joi";
 
 const Editdistrict = () => {
   let district = useParams();
   let [name, setName] = useState("");
+  let [error, setError] = useState({});
+
   const navigate = useNavigate();
 
   let districtname = [
@@ -45,7 +49,15 @@ const Editdistrict = () => {
     "Valsad",
   ];
 
+  const validate = (data) => {
+    const schema = Joi.object({
+      name: Joi.string().max(100).required().label("Name"),
+    });
+    return schema.validate(data, { abortEarly: false, allowUnknown: true });
+  };
+
   const fetchdata = async () => {
+    resetError();
     let data = {
       _id: district.id,
     };
@@ -73,7 +85,7 @@ const Editdistrict = () => {
   };
 
   const canclehandler = () => {
-    navigate(`/viewdistrict/${district.id}`)
+    navigate(`/viewdistrict/${district.id}`);
   };
 
   return (
@@ -99,19 +111,23 @@ const Editdistrict = () => {
               </label>
               <select
                 name=""
-                id=""
+                id="name"
                 className="form-select"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               >
+                <option value="" disabled>
+                  Select District
+                </option>
                 {districtname.map((name) => {
                   return <option value={name}>{name}</option>;
                 })}
               </select>
+              {error?.name && <span className="error">{error["name"]}</span>}
             </div>
           </div>
         </form>
-        <Footer add={saveHandler} cancle={canclehandler}/>
+        <Footer add={saveHandler} cancle={canclehandler} />
       </div>
     </div>
   );

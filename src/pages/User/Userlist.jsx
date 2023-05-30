@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "../../Components/Button";
 import { api } from "../../helper/api";
 import Pagination from "../../Components/Pagination";
@@ -11,13 +11,13 @@ import {
 import { RiCloseCircleFill } from "react-icons/ri";
 import { HiCheckCircle } from "react-icons/hi";
 
-const VehicleList = () => {
+const Userlist = () => {
   let queryParams = new URLSearchParams(window.location.search);
 
   let params = queryParams.get("page_no");
   let initialPage = parseInt(params);
 
-  const [district, setDistrict] = useState([]);
+  const [user, setUser] = useState([]);
   const [totalRecods, setTotalRecods] = useState(0);
   let [sort_by, setSort_by] = useState("");
   let [sort_type, setSort_type] = useState(-1);
@@ -25,12 +25,11 @@ const VehicleList = () => {
   const [currentPage, setCurrentPage] = useState(
     !!initialPage ? initialPage : 1
   );
-
-  let [id, setId] = useState();
   let [status, setStatus] = useState("");
-  let [name, setName] = useState("");
 
   let pageCount = Math.ceil(totalRecods / recordPerPage);
+
+  console.log(user)
 
   const loaddata = async (pageNo) => {
     let data = {
@@ -38,21 +37,20 @@ const VehicleList = () => {
       record_per_page: recordPerPage,
       sort_by: sort_by,
       sort_type: sort_type,
-      name: name,
       status: status,
     };
-
-    let response = await api("master/district", data);
+    let response = await api("user", data);
     console.log(response.data.data);
     if (response && response.status === 200) {
       if (response?.data?.total_records) {
         setTotalRecods(response?.data?.total_records);
       }
-      setDistrict(response.data.data);
+      setUser(response?.data?.data);
     } else {
       alert("error");
     }
   };
+
 
   const onPaginationChange = async (page) => {
     let currentPage = page.selected + 1;
@@ -64,26 +62,13 @@ const VehicleList = () => {
     );
   };
 
-  const editHandler =async(item) => {
+  const editHandler = async (item) => {
     let data = {
       _id: item._id,
       status: !item.status,
     };
 
-    const response = await api("master/district/status", data);
-    if (response && response.status === 200) {
-      setStatus("");
-      loaddata();
-    }
-  };
-
-  const statusHandler = async () => {
-    let data = {
-      _id: id,
-      status: !status,
-    };
-
-    const response = await api("master/district/status", data);
+    const response = await api("user/status", data);
     if (response && response.status === 200) {
       setStatus("");
       loaddata();
@@ -116,18 +101,17 @@ const VehicleList = () => {
     setCurrentPage(currentPage);
     loaddata(!!params ? params : 1);
   }, [recordPerPage]);
-
   return (
     <div className="container- px-3 mt-5">
       <div className="row p-4">
         <div className="col-6">
-          <h2>District List</h2>
+          <h2> User List</h2>
         </div>
         <div className="col-6">
           <Button
             name="Add"
             icon={<i class="fa-solid fa-plus p-1"></i>}
-            link="/adddistrict"
+            link="/adduser"
             className="float-end"
           />
         </div>
@@ -139,12 +123,30 @@ const VehicleList = () => {
             <tr className="text-center  fs-6">
               <th scope="col">#</th>
               <th scope="col">
-                District
+                Name
                 <button
                   onClick={() => sortingHandler("name")}
                   style={{ border: "none", background: "none" }}
                 >
                   {getSortIcon("name")}
+                </button>
+              </th>
+              <th>
+                Email-id
+                <button
+                  onClick={() => sortingHandler("email_id")}
+                  style={{ border: "none", background: "none" }}
+                >
+                  {getSortIcon("email_id")}
+                </button>
+              </th>
+              <th>
+                Mobile-no
+                <button
+                  onClick={() => sortingHandler("mobile_no")}
+                  style={{ border: "none", background: "none" }}
+                >
+                  {getSortIcon("mobile_no")}
                 </button>
               </th>
               <th scope="col">
@@ -160,17 +162,29 @@ const VehicleList = () => {
             </tr>
           </thead>
           <tbody>
-            {district.map((item, index) => {
+            {user.map((item, index) => {
               return (
                 <>
                   <tr className="text-center fs-6" key={index}>
                     <td>{index + 1}</td>
                     <td>{item.name}</td>
+                    <td>{item.email_id}</td>
+                    <td>{item.mobile_no}</td>
                     <td>
-                      <button className="fs-5" style={{border:'none',background:'none'}} onClick={() => editHandler(item)}>{item.status === true ? <HiCheckCircle className='focus:outline-none text-green-700 text-lg' /> : <RiCloseCircleFill className='focus:outline-none text-red-700 text-lg' />}</button>
+                      <button
+                        className="fs-5"
+                        style={{ border: "none", background: "none" }}
+                        onClick={() => editHandler(item)}
+                      >
+                        {item.status === true ? (
+                          <HiCheckCircle className="focus:outline-none text-green-700 text-lg" />
+                        ) : (
+                          <RiCloseCircleFill className="focus:outline-none text-red-700 text-lg" />
+                        )}
+                      </button>
                     </td>
                     <td>
-                      <Link to={`/viewdistrict/${item._id}`}>
+                      <Link to={`/viewuser/${item._id}`}>
                         <i class="fa-sharp fa-solid fa-eye text-black"></i>
                       </Link>
                     </td>
@@ -191,4 +205,4 @@ const VehicleList = () => {
   );
 };
 
-export default VehicleList;
+export default Userlist;

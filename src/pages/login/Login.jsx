@@ -20,26 +20,28 @@ const Login = () => {
 
   const validate = (data) => {
     const schema = Joi.object({
-      email: Joi.string().max(100).required().label("Name"),
+      username: Joi.string().max(100).required().label("Name"),
       password: Joi.string().max(8).required().label("Password"),
     });
     return schema.validate(data, { abortEarly: false, allowUnknown: true });
   };
 
-  const login = async (e) => {
-    e.preventDefault();
+  const login = async () => {
+    resetError();
+
     let data = {
       username: email,
-      password: password
+      password: password,
     };
+
+    const { error } = validate(data);
+    if (error) return showError(error.details);
+
     let response = await api("auth/", data);
     console.log(response);
     if (response && response.status === 200) {
-      // localStorage.setItem('token',data.emailAddress)
-      // navigate('/home');
-      navigate('/dashboard')
+      navigate("/dashboard");
       window.location.reload();
-
     } else {
     }
   };
@@ -87,7 +89,7 @@ const Login = () => {
                           </label>
                           <input
                             type="email"
-                            id="form3Example4c"
+                            id="username"
                             className="form-control"
                             onChange={(e) => setEmail(e.target.value)}
                             autoFocus
@@ -102,7 +104,7 @@ const Login = () => {
                           </label>
                           <input
                             type="password"
-                            id="form3Example4cd"
+                            id="password"
                             className="form-control"
                             onChange={(e) => setPassword(e.target.value)}
                           />
@@ -112,7 +114,11 @@ const Login = () => {
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4 ">
                         <Button name="Login" onclick={login} />
                       </div>
-                      <div className="text-center"><span style={{opacity:'0.2',fontSize:'15px'}}>------------------------ OR ------------------------</span></div>
+                      <div className="text-center">
+                        <span style={{ opacity: "0.2", fontSize: "15px" }}>
+                          ------------------------ OR ------------------------
+                        </span>
+                      </div>
                       <div className="gmail text-center mt-3 mb-3">
                         <FcGoogle
                           fontSize={30}

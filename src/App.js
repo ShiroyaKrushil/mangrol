@@ -1,71 +1,55 @@
 import './App.scss';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import Navleft from './Components/Navleft';
 import Navtop from './Components/Navtop';
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Company from './pages/Company/Company';
+
+import Dashboard from './pages/Dashboard/Dashboard';
+
+import Memberlist from './pages/Member/Memberlist';
+import Addmember from './pages/Member/Addmember';
+import Editmember from './pages/Member/Editmember';
+import Viewmember from './pages/Member/Viewmember';
+
 import DistrictList from './pages/District/DistrictList'
 import Adddistrict from './pages/District/Adddistrict'
 import Editdistrict from './pages/District/Editdistrict'
 import Viewdistrict from './pages/District/Viewdistrict'
 
-import Driver from './pages/Driver/Driver';
-import Customer from './pages/Customer/Customer';
-import Dashboard from './pages/Dashboard/Dashboard';
-import Advancepayment from './pages/AdvancePayment/Advancepayment';
-import Driverattendance from './pages/DriverAttendance/Driverattendance';
-import Drivergeolocation from './pages/DriverGeoLocation/Drivergeolocation';
-import Expense from './pages/Expense/Expense';
-import Expensecategory from './pages/ExpenseCategory/Expensecategory';
-import Lead from './pages/Lead/Lead';
-import Leadcategory from './pages/LeadCategory/Leadcategory';
-import Site from './pages/Site/Site';
-import Task from './pages/Task/Task';
-import Taskcategory from './pages/TaskCategory/Taskcategory';
-import Addcompany from './pages/Company/Add';
-import Edit from './pages/Company/Edit';
-import Viewcompany from './pages/Company/View';
-import Viewdriver from './pages/Driver/Viewdriver';
-import Adddriver from './pages/Driver/Adddriver';
-import Editdriver from './pages/Driver/Editdriver';
-import Viewcustomer from './pages/Customer/Viewcustomer';
-import Addcustomer from './pages/Customer/Addcustomer';
-import Editcustomer from './pages/Customer/Editcustomer';
-import Viewdriverattendance from './pages/DriverAttendance/Viewdriverattendance';
-import Adddriverattendance from './pages/DriverAttendance/Adddriverattendance';
-import Editdriverattendance from './pages/DriverAttendance/Editdriverattendance';
-import Viewdrivergeolocation from './pages/DriverGeoLocation/Viewdrivergeolocation';
-import Adddrivergeolocation from './pages/DriverGeoLocation/Adddrivergeolocation';
-import Editdrivergeolocation from './pages/DriverGeoLocation/Editdrivergeolocation';
-import Addadvancepayment from './pages/AdvancePayment/Addadvancepayment';
-import Viewadvancepayment from './pages/AdvancePayment/Viewadvancepayment';
-import Editadvancepayment from './pages/AdvancePayment/Editadvancepayment';
-import Viewtaskcategory from './pages/TaskCategory/Viewtaskcategory';
-import Addtaskcategory from './pages/TaskCategory/Addtaskcategory';
-import Edittaskcategory from './pages/TaskCategory/Edittaskcategory';
-import Viewtask from './pages/Task/Viewtask'
-import Addtask from './pages/Task/Addtask';
-import Edittask from './pages/Task/Edittask';
-import Viewexpensecategory from './pages/ExpenseCategory/Viewexpensecategory';
-import Addexpensecategory from './pages/ExpenseCategory/Addexpensecategory';
-import Editexpensecategory from './pages/ExpenseCategory/Editexpensecategory';
-import Viewexpense from './pages/Expense/Viewexpense';
-import Addexpense from './pages/Expense/Addexpense';
-import Editexpense from './pages/Expense/Editexpense';
-import Viewsite from './pages/Site/Viewsite';
-import Addsite from './pages/Site/Addsite';
-import Editsite from './pages/Site/Editsite';
-import Viewleadcategory from './pages/LeadCategory/Viewleadcategory';
-import Addleadcategory from './pages/LeadCategory/Addleadcategory';
-import Editleadcategory from './pages/LeadCategory/Editleadcategory';
-import Viewlead from './pages/Lead/Viewlead';
-import Addlead from './pages/Lead/Addlead';
-import Editlead from './pages/Lead/Editlead';
+import Talukalist from './pages/Taluka/List'
+import Talukaadd from './pages/Taluka/Add';
+import Talukaedit from './pages/Taluka/Edit';
+import Talukaview from './pages/Taluka/View';
+
+import Zonelist from './pages/Zone/Zonelist';
+import Addzone from './pages/Zone/Addzone';
+import Editzone from './pages/Zone/Editzone';
+import Viewzone from './pages/Zone/Viewzone';
+
+import Businesstypelist from './pages/Business_type/Business_typelist'
+import Addbusinesstype from './pages/Business_type/Addbusiness_type'
+import Editbusinesstype from './pages/Business_type/Editbusiness_type'
+import Viewbusinesstype from './pages/Business_type/Viewbusiness_type'
+
+import Powersupplylist from './pages/Power_Supply/Powersupplylist'
+import Addpowersupply from './pages/Power_Supply/Addpowersupply'
+import Editpowersupply from './pages/Power_Supply/Editpowersupply';
+import Viewpowersupply from './pages/Power_Supply/Viewpowersupply';
+
+import Associationlist from './pages/Association/Associationlist';
+import Addassociation from './pages/Association/Addassociation'
+import Editassociation from './pages/Association/Editassociation';
+import Viewassociation from './pages/Association/Viewassociation';
+
+import Userlist from './pages/User/Userlist';
+import Adduser from './pages/User/Adduser'
+import Viewuser from './pages/User/Viewuser';
 
 import Login from './pages/login/Login';
-import Signup from './pages/signUp/Signup'
 
-import Verification from './pages/Verification/Verification';
 
 function App() {
   const [sidebar, setSidebar] = useState(true)
@@ -78,11 +62,10 @@ function App() {
   }, [])
   return (
     <BrowserRouter>
-
+      <ToastContainer/>
       {isLogin != null && <>
         {!isLogin && <Routes>
           <Route path='/' element={<Login loginHandler={(e) => setIsLogin(e)} />} />
-          <Route path='/verification' element={<Verification />} />
         </Routes>}
         {isLogin &&
           <div className={`main ${sidebar ? 'msb-x' : ''}`}>
@@ -93,75 +76,49 @@ function App() {
               <Navtop side={setSidebar} sidebar={sidebar} />
               <Routes>
                 <Route path='/' element={<Dashboard />} />
-                <Route path='/company' element={<Company />} />
-                <Route path='/addcompany' element={<Addcompany />} />
-                <Route path='/viewcompany' element={<Viewcompany />} />
-                <Route path='/edit' element={<Edit />} />
-
+               
+                <Route path="/memberlist" element={<Memberlist />} />
+                <Route path="/addmember" element={<Addmember />} />
+                <Route path="/editmember/:id" element={<Editmember />} />
+                <Route path="/viewmember/:id" element={<Viewmember />} />
+               
                 <Route path="/districtlist" element={<DistrictList />} />
                 <Route path="/adddistrict" element={<Adddistrict />} />
                 <Route path="/editdistrict/:id" element={<Editdistrict />} />
                 <Route path="/viewdistrict/:id" element={<Viewdistrict />} />
+                
+                <Route path="/talukalist" element={<Talukalist/>} />
+                <Route path="/talukaadd" element={<Talukaadd />} />
+                <Route path="/talukaedit/:id" element={<Talukaedit />} />
+                <Route path="/talukaview/:id" element={<Talukaview />} />
 
-                <Route path="/driver" element={<Driver />} />
-                <Route path="/viewdriver" element={<Viewdriver />} />
-                <Route path="/adddriver" element={<Adddriver />} />
-                <Route path="/editdriver" element={<Editdriver />} />
+                <Route path="/zonelist" element={<Zonelist />} />
+                <Route path="/addzone" element={<Addzone />} />
+                <Route path="/editzone/:id" element={<Editzone />} />
+                <Route path="/viewzone/:id" element={<Viewzone />} />
+                
+                <Route path="/businesstypelist" element={<Businesstypelist />} />
+                <Route path="/addbusinesstype" element={<Addbusinesstype />} />
+                <Route path="/editbusinesstype/:id" element={<Editbusinesstype />} />
+                <Route path="/viewbusinesstype/:id" element={<Viewbusinesstype />} />
+               
+                <Route path="/powersupplylist" element={<Powersupplylist />} />
+                <Route path="/addpowersupply" element={<Addpowersupply />} />
+                <Route path="/editpowersupply/:id" element={<Editpowersupply />} />
+                <Route path="/viewpowersupply/:id" element={<Viewpowersupply />} />
+                
+                <Route path="/associationlist" element={<Associationlist />} />
+                <Route path="/addassociation" element={<Addassociation />} />
+                <Route path="/editassociation/:id" element={<Editassociation />} />
+                <Route path="/viewassociation/:id" element={<Viewassociation />} />
+               
+                <Route path="/userlist" element={<Userlist />} />
+                <Route path="/adduser" element={<Adduser />} />
+                <Route path="/viewuser/:id" element={<Viewuser />} />
 
-                <Route path="/customer" element={<Customer />} />
-                <Route path="/viewcustomer" element={<Viewcustomer />} />
-                <Route path="/addcustomer" element={<Addcustomer />} />
-                <Route path="/editcustomer" element={<Editcustomer />} />
 
-                <Route path="/driverattendance" element={<Driverattendance />} />
-                <Route path="/viewdriverattendance" element={<Viewdriverattendance />} />
-                <Route path="/adddriverattendance" element={<Adddriverattendance />} />
-                <Route path="/editdriverattendance" element={<Editdriverattendance />} />
 
-                <Route path="/drivergeolocation" element={<Drivergeolocation />} />
-                <Route path="/viewdrivergeolocation" element={<Viewdrivergeolocation />} />
-                <Route path="/adddrivergeolocation" element={<Adddrivergeolocation />} />
-                <Route path="/editdrivergeolocation" element={<Editdrivergeolocation />} />
-
-                <Route path="/advancepayment" element={<Advancepayment />} />
-                <Route path="/addadvancepayment" element={<Addadvancepayment />} />
-                <Route path="/viewadvancepayment" element={<Viewadvancepayment />} />
-                <Route path="/editadvancepayment" element={<Editadvancepayment />} />
-
-                <Route path="/taskcategory" element={<Taskcategory />} />
-                <Route path="/viewtaskcategory" element={<Viewtaskcategory />} />
-                <Route path="/addtaskcategory" element={<Addtaskcategory />} />
-                <Route path="/Edittaskcategory" element={<Edittaskcategory />} />
-
-                <Route path="/task" element={<Task />} />
-                <Route path="/viewtask" element={<Viewtask />} />
-                <Route path="/addtask" element={<Addtask />} />
-                <Route path="/edittask" element={<Edittask />} />
-
-                <Route path="/expensecategory" element={<Expensecategory />} />
-                <Route path="/viewexpensecategory" element={<Viewexpensecategory />} />
-                <Route path="/addexpensecategory" element={<Addexpensecategory />} />
-                <Route path="/editexpensecategory" element={<Editexpensecategory />} />
-
-                <Route path="/expense" element={<Expense />} />
-                <Route path="/viewexpense" element={<Viewexpense />} />
-                <Route path="/addexpense" element={<Addexpense />} />
-                <Route path="/editexpense" element={<Editexpense />} />
-
-                <Route path="/site" element={<Site />} />
-                <Route path="/viewsite" element={<Viewsite />} />
-                <Route path="/addsite" element={<Addsite />} />
-                <Route path="/editsite" element={<Editsite />} />
-
-                <Route path="/leadcategory" element={<Leadcategory />} />
-                <Route path="/viewleadcategory" element={<Viewleadcategory />} />
-                <Route path="/addleadcategory" element={<Addleadcategory />} />
-                <Route path="/editleadcategory" element={<Editleadcategory />} />
-
-                <Route path="/lead" element={<Lead />} />
-                <Route path="/viewlead" element={<Viewlead />} />
-                <Route path="/addlead" element={<Addlead />} />
-                <Route path="/editlead" element={<Editlead />} />
+               
               </Routes>
             </div>
           </div>}
