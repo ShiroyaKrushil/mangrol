@@ -3,13 +3,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../Components/Button";
 import { api } from "../../helper/api";
 import Footer from "../../Components/Footer_two";
-import { resetError, showError } from "../../helper/error";
-import Joi from "joi";
 
 const Editdistrict = () => {
   let district = useParams();
   let [name, setName] = useState("");
-  let [error, setError] = useState({});
 
   const navigate = useNavigate();
 
@@ -49,15 +46,9 @@ const Editdistrict = () => {
     "Valsad",
   ];
 
-  const validate = (data) => {
-    const schema = Joi.object({
-      name: Joi.string().max(100).required().label("Name"),
-    });
-    return schema.validate(data, { abortEarly: false, allowUnknown: true });
-  };
+
 
   const fetchdata = async () => {
-    resetError();
     let data = {
       _id: district.id,
     };
@@ -123,7 +114,6 @@ const Editdistrict = () => {
                   return <option value={name}>{name}</option>;
                 })}
               </select>
-              {error?.name && <span className="error">{error["name"]}</span>}
             </div>
           </div>
         </form>

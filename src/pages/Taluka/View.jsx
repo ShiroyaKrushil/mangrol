@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Button from "../../Components/Button";
-import { useParams,useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer";
 import { api } from "../../helper/api";
-import { TfiCheckBox } from "react-icons/tfi";
-import { MdCheckBoxOutlineBlank } from "react-icons/md";
+import { RiCloseCircleFill } from "react-icons/ri";
+import { HiCheckCircle } from "react-icons/hi";
 
 const View = () => {
   const parms = useParams();
@@ -79,11 +79,16 @@ const View = () => {
                       <td>Status</td>
                       <td>:</td>
                       <td>
-                        {" "}
                         {taluka.status === true ? (
-                          <TfiCheckBox className="text-lg font-extrabold" />
+                          <HiCheckCircle
+                            className="focus:outline-none text-green-700 text-lg"
+                            style={{ color: "green" }}
+                          />
                         ) : (
-                          <MdCheckBoxOutlineBlank />
+                          <RiCloseCircleFill
+                            className="focus:outline-none text-red-700 text-lg"
+                            style={{ color: "red" }}
+                          />
                         )}
                       </td>
                     </tr>
@@ -93,7 +98,7 @@ const View = () => {
             </div>
           </div>
         </div>
-        <Footer delete={deletedistrict}/>
+        <Footer delete={deletedistrict} />
       </div>
     </div>
   );

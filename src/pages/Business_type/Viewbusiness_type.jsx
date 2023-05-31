@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Button from "../../Components/Button";
-import { useParams,useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer";
 import { api } from "../../helper/api";
-import { TfiCheckBox } from "react-icons/tfi";
-import { MdCheckBoxOutlineBlank } from "react-icons/md";
+import { RiCloseCircleFill } from "react-icons/ri";
+import { HiCheckCircle } from "react-icons/hi";
 
 const Viewbusiness_type = () => {
   const parms = useParams();
@@ -74,9 +74,15 @@ const Viewbusiness_type = () => {
                       <td>:</td>
                       <td>
                         {businesstype.status === true ? (
-                          <TfiCheckBox className="text-lg font-extrabold" />
+                          <HiCheckCircle
+                            style={{ color: "green" }}
+                            className="focus:outline-none text-green-700 text-lg"
+                          />
                         ) : (
-                          <MdCheckBoxOutlineBlank />
+                          <RiCloseCircleFill
+                            style={{ color: "red" }}
+                            className="focus:outline-none text-red-700 text-lg"
+                          />
                         )}
                       </td>
                     </tr>
@@ -86,10 +92,10 @@ const Viewbusiness_type = () => {
             </div>
           </div>
         </div>
-        <Footer delete={deleteHandler}/>
+        <Footer delete={deleteHandler} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Viewbusiness_type
+export default Viewbusiness_type;

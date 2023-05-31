@@ -3,8 +3,8 @@ import Button from "../../Components/Button";
 import { api } from "../../helper/api";
 import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../../Components/Footer";
-import { TfiCheckBox } from "react-icons/tfi";
-import { MdCheckBoxOutlineBlank } from "react-icons/md";
+import { RiCloseCircleFill } from "react-icons/ri";
+import { HiCheckCircle } from "react-icons/hi";
 
 const Viewvehicle = () => {
   const [district, setDistrict] = useState([]);
@@ -25,7 +25,7 @@ const Viewvehicle = () => {
   };
 
   useEffect(() => {
-    const fetchdata = async (id) => {
+    const fetchdata = async () => {
       let data = {
         _id: parms.id,
       };
@@ -38,6 +38,10 @@ const Viewvehicle = () => {
     };
     fetchdata();
   }, []);
+
+  const back = () => {
+    navigate(`/districtlist`);
+  };
 
   return (
     <>
@@ -55,28 +59,41 @@ const Viewvehicle = () => {
             />
             <Button
               name="Back"
-              link="/districtlist"
+              // link='/districtlist'
               icon={<i class="fa-solid fa-arrow-left p-1"></i>}
+              onclick={back}
             />
           </div>
           <div className="container-fluid" style={{ marginTop: "60px" }}>
             <div className="row">
-              <div className="row d-flex justify-content-center text-center">
-                <div className="col-md-3 col-sm-4 py-5 m-3 box ">
-                  <p
-                    className="text-center"
-                    style={{ color: "black", fontWeight: "bold" }}
-                  >
-                    District Name
-                  </p>
-                  {<span className="span text-center">{district.name}</span>}
-                  <p
-                    className="text-center"
-                    style={{ color: "black", fontWeight: "bold",marginTop:'20px' }}
-                  >
-                    Status
-                  </p>
-                  {district.status === true ? <TfiCheckBox className='text-lg font-extrabold' /> : <MdCheckBoxOutlineBlank />}
+              <div className="row d-flex justify-content-center">
+                <div className="col-md-3 col-sm-4 py-4 m-3 box  text-center">
+                  <table class="table table-borderless">
+                    <tbody className="fs-5">
+                      <tr>
+                        <td>District</td>
+                        <td>:</td>
+                        <td>{district.name}</td>
+                      </tr>
+                      <tr>
+                        <td>Status</td>
+                        <td>:</td>
+                        <td>
+                          {district.status === true ? (
+                            <HiCheckCircle
+                              className="focus:outline-none text-green-700 text-lg"
+                              style={{ color: "green" }}
+                            />
+                          ) : (
+                            <RiCloseCircleFill
+                              className="focus:outline-none text-red-700 text-lg"
+                              style={{ color: "red" }}
+                            />
+                          )}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>

@@ -163,7 +163,7 @@ console.log(taluka)
                     <td>{item.name}</td>
                     <td>{item.district?.name}</td>
                     <td>
-                      <button className="fs-5" style={{border:'none',background:'none'}} onClick={() => editHandler(item)}>{item.status === true ? <HiCheckCircle className='focus:outline-none text-green-700 text-lg' /> : <RiCloseCircleFill className='focus:outline-none text-red-700 text-lg' />}</button>
+                      <button className="fs-5" style={{border:'none',background:'none'}} onClick={() => editHandler(item)}>{item.status === true ? <HiCheckCircle className='focus:outline-none text-green-700 text-lg' style={{color:'green'}}/> : <RiCloseCircleFill className='focus:outline-none text-red-700 text-lg' style={{color:'red'}}/>}</button>
                     </td>
                     <td>
                       <Link to={`/talukaview/${item._id}`}>

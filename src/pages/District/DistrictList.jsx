@@ -167,7 +167,7 @@ const VehicleList = () => {
                     <td>{index + 1}</td>
                     <td>{item.name}</td>
                     <td>
-                      <button className="fs-5" style={{border:'none',background:'none'}} onClick={() => editHandler(item)}>{item.status === true ? <HiCheckCircle className='focus:outline-none text-green-700 text-lg' /> : <RiCloseCircleFill className='focus:outline-none text-red-700 text-lg' />}</button>
+                      <button className="fs-5" style={{border:'none',background:'none'}} onClick={() => editHandler(item)}>{item.status === true ? <HiCheckCircle className='focus:outline-none text-green-700 text-lg' style={{color:'green'}}/> : <RiCloseCircleFill className='focus:outline-none text-red-700 text-lg' style={{color:'red'}}/>}</button>
                     </td>
                     <td>
                       <Link to={`/viewdistrict/${item._id}`}>

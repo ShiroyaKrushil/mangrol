@@ -110,7 +110,7 @@ function App() {
                 <Route path="/associationlist" element={<Associationlist />} />
                 <Route path="/addassociation" element={<Addassociation />} />
                 <Route path="/editassociation/:id" element={<Editassociation />} />
-                <Route path="/viewassociation/:id" element={<Viewassociation />} />
+                <Route path="/viewassociation" element={<Viewassociation />} />
                
                 <Route path="/userlist" element={<Userlist />} />
                 <Route path="/adduser" element={<Adduser />} />

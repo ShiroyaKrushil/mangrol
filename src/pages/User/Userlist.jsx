@@ -45,7 +45,7 @@ const Userlist = () => {
       if (response?.data?.total_records) {
         setTotalRecods(response?.data?.total_records);
       }
-      setUser(response?.data?.data);
+      setUser(response.data.data);
     } else {
       alert("error");
     }
@@ -101,6 +101,8 @@ const Userlist = () => {
     setCurrentPage(currentPage);
     loaddata(!!params ? params : 1);
   }, [recordPerPage]);
+
+  console.log(user)
   return (
     <div className="container- px-3 mt-5">
       <div className="row p-4">
