@@ -15,13 +15,13 @@ const VehicleList = () => {
   let queryParams = new URLSearchParams(window.location.search);
   let params = queryParams.get("page_no");
   let initialPage = parseInt(params);
-  console.log(initialPage);
 
   const [district, setDistrict] = useState([]);
   const [totalRecods, setTotalRecods] = useState(0);
   let [sort_by, setSort_by] = useState("");
   let [sort_type, setSort_type] = useState(-1);
   let [recordPerPage, setRecordPerPage] = useState(5);
+  
   const [currentPage, setCurrentPage] = useState(
     !!initialPage ? initialPage : 1
   );
@@ -56,12 +56,9 @@ const VehicleList = () => {
   const onPaginationChange = async (page) => {
     let currentPage = page.selected + 1;
     loaddata(currentPage);
-    window.history.replaceState(
-      {},
-      "",
-      window.location.pathname + "?page_no=" + currentPage
-    );
-    localStorage.setItem("currentPage", window.location.pathname + "?page_no=" + currentPage);
+    window.history.replaceState({},"",window.location.pathname + "?page_no=" + currentPage);
+
+    localStorage.setItem("currentPage","?page_no=" + currentPage);
   };
 
   const editHandler = async (item) => {
@@ -102,7 +99,7 @@ const VehicleList = () => {
   useEffect(() => {
     setCurrentPage(currentPage);
     loaddata(!!params ? params : 1);
-  }, [recordPerPage]);
+  }, [recordPerPage][editHandler]);
 
   return (
     <div className="container- px-3 mt-5">

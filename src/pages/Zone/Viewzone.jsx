@@ -10,6 +10,7 @@ const Viewsite = () => {
   const [zone, setZone] = useState([]);
   const parms = useParams();
   const navigate = useNavigate();
+  let [Page, setPage] = useState("");
 
   const deletezone = async () => {
     const data = {
@@ -35,8 +36,12 @@ const Viewsite = () => {
       setZone(response.data.data);
     }
   };
-  
+  const back = () => {
+    navigate("/zonelist" + Page);
+  };
   useEffect(() => {
+    let page = localStorage.getItem("currentPage");
+    setPage(page);
     fetchdata();
   }, []);
 
@@ -55,7 +60,7 @@ const Viewsite = () => {
           />
           <Button
             name="Back"
-            link="/zonelist"
+            onclick={back}
             icon={<i class="fa-solid fa-arrow-left p-1"></i>}
           />
         </div>

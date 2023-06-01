@@ -10,6 +10,7 @@ const Viewbusiness_type = () => {
   const parms = useParams();
   let [businesstype, setBusinessType] = useState([]);
   const navigate = useNavigate();
+  let [Page,setPage] = useState('');
 
   const deleteHandler = async () => {
     const data = {
@@ -36,7 +37,13 @@ const Viewbusiness_type = () => {
     }
   };
 
+  const back = () => {
+    navigate('/businesstypelist'+ Page);
+  };
+
   useEffect(() => {
+    let page = localStorage.getItem('currentPage')
+    setPage(page)
     fetchdata();
   }, [parms.id]);
   return (
@@ -54,7 +61,7 @@ const Viewbusiness_type = () => {
           />
           <Button
             name="Back"
-            link="/businesstypelist"
+            onclick={back}
             icon={<i class="fa-solid fa-arrow-left p-1"></i>}
           />
         </div>

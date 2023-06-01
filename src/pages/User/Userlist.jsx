@@ -60,6 +60,8 @@ const Userlist = () => {
       "",
       window.location.pathname + "?page_no=" + currentPage
     );
+    localStorage.setItem("currentPage", "?page_no=" + currentPage);
+
   };
 
   const editHandler = async (item) => {
@@ -100,7 +102,7 @@ const Userlist = () => {
   useEffect(() => {
     setCurrentPage(currentPage);
     loaddata(!!params ? params : 1);
-  }, [recordPerPage]);
+  }, [recordPerPage][editHandler]);
 
   console.log(user)
   return (
@@ -179,9 +181,9 @@ const Userlist = () => {
                         onClick={() => editHandler(item)}
                       >
                         {item.status === true ? (
-                          <HiCheckCircle className="focus:outline-none text-green-700 text-lg" />
+                          <HiCheckCircle style={{color:'green'}} />
                         ) : (
-                          <RiCloseCircleFill className="focus:outline-none text-red-700 text-lg" />
+                          <RiCloseCircleFill style={{color:'red'}}/>
                         )}
                       </button>
                     </td>

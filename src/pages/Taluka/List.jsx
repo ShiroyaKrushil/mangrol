@@ -11,98 +11,99 @@ import {
 import { RiCloseCircleFill } from "react-icons/ri";
 import { HiCheckCircle } from "react-icons/hi";
 const list = () => {
-
   let queryParams = new URLSearchParams(window.location.search);
-    let params = queryParams.get('page_no');
-    let initialPage = parseInt(params);
+  let params = queryParams.get("page_no");
+  let initialPage = parseInt(params);
 
-    let [taluka, setTaluka] = useState([]);
-    let [sort_by, setSort_by] = useState('');
-    let [sort_type, setSort_type] = useState(-1);
-    const [totalRecods, setTotalRecods] = useState(0);
-    let [recordPerPage, setRecordPerPage] = useState(5);
-    const [currentPage, setCurrentPage] = useState(!!initialPage ? initialPage : 1);
-    let [id, setId] = useState();
-    let [status, setStatus] = useState('');
-    let [name, setName] = useState('');
+  let [taluka, setTaluka] = useState([]);
+  let [sort_by, setSort_by] = useState("");
+  let [sort_type, setSort_type] = useState(-1);
+  const [totalRecods, setTotalRecods] = useState(0);
+  let [recordPerPage, setRecordPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(
+    !!initialPage ? initialPage : 1
+  );
+  let [id, setId] = useState();
+  let [status, setStatus] = useState("");
+  let [name, setName] = useState("");
 
-    let pageCount = Math.ceil(totalRecods / recordPerPage);
+  let pageCount = Math.ceil(totalRecods / recordPerPage);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const fetchdata = async (pageNo) => {
-        let data = {
-            skip_number: (pageNo - 1) * recordPerPage,
-            record_per_page: recordPerPage,
-            sort_by: sort_by,
-            sort_type: sort_type,
-            name: name,
-            status: status
-        }
-
-        const response = await api('master/taluka', data);
-        if (response && response.status === 200) {
-            if (response?.data?.total_records) {
-                setTotalRecods(response?.data?.total_records);
-            }
-            setTaluka(response.data.data);
-        }
+  const fetchdata = async (pageNo) => {
+    let data = {
+      skip_number: (pageNo - 1) * recordPerPage,
+      record_per_page: recordPerPage,
+      sort_by: sort_by,
+      sort_type: sort_type,
+      name: name,
+      status: status,
     };
 
-    useEffect(() => {
-        setCurrentPage(currentPage);
-        fetchdata(!!params ? params : 1);
-
-    }, [recordPerPage]);
-
-    const addHandler = () => {
-        navigate('/talukaadd');
-    };
-
-    const onPaginationChange = async (page) => {
-        let currentPage = page.selected + 1;
-        fetchdata(currentPage);
-        window.history.replaceState({}, '', window.location.pathname + '?page_no=' + currentPage);
-    };
-
-   
-
-    const editHandler =async(item) => {
-      let data = {
-        _id: item._id,
-        status: !item.status,
-      };
-  
-      const response = await api("master/taluka/status", data);
-      if (response && response.status === 200) {
-        setStatus("");
-        fetchdata();
+    const response = await api("master/taluka", data);
+    if (response && response.status === 200) {
+      if (response?.data?.total_records) {
+        setTotalRecods(response?.data?.total_records);
       }
+      setTaluka(response.data.data);
+    }
+  };
+
+
+
+  const onPaginationChange = async (page) => {
+    let currentPage = page.selected + 1;
+    fetchdata(currentPage);
+    window.history.replaceState(
+      {},
+      "",
+      window.location.pathname + "?page_no=" + currentPage
+    );
+    localStorage.setItem("currentPage", "?page_no=" + currentPage);
+  };
+
+  const editHandler = async (item) => {
+    let data = {
+      _id: item._id,
+      status: !item.status,
     };
 
-    const sortingHandler = (key) => {
-        if (sort_by === key) {
-            sort_type = sort_type == 1 ? -1 : 1;
-        } else {
-            sort_by = key;
-            sort_type = 1
-        }
-        setSort_by(sort_by);
-        setSort_type(sort_type);
-        fetchdata();
+    const response = await api("master/taluka/status", data);
+    if (response && response.status === 200) {
+      setStatus("");
+      fetchdata();
     }
+  };
 
-    const getSortIcon = (key) => {
-        if (key === sort_by && sort_type == 1) {
-            return <TiArrowSortedUp className='text-base' />
-        } else if (key === sort_by && sort_type == -1) {
-            return <TiArrowSortedDown className='text-base' />
-        } else {
-            return <TiArrowUnsorted className='text-base' />
-        }
+  const sortingHandler = (key) => {
+    if (sort_by === key) {
+      sort_type = sort_type == 1 ? -1 : 1;
+    } else {
+      sort_by = key;
+      sort_type = 1;
     }
+    setSort_by(sort_by);
+    setSort_type(sort_type);
+    fetchdata();
+  };
 
-console.log(taluka)
+  const getSortIcon = (key) => {
+    if (key === sort_by && sort_type == 1) {
+      return <TiArrowSortedUp className="text-base" />;
+    } else if (key === sort_by && sort_type == -1) {
+      return <TiArrowSortedDown className="text-base" />;
+    } else {
+      return <TiArrowUnsorted className="text-base" />;
+    }
+  };
+
+  useEffect(() => {
+    setCurrentPage(currentPage);
+    fetchdata(!!params ? params : 1);
+  }, [recordPerPage][editHandler]);
+
+
   return (
     <div className="container- px-3 mt-5">
       <div className="row p-4">
@@ -163,7 +164,23 @@ console.log(taluka)
                     <td>{item.name}</td>
                     <td>{item.district?.name}</td>
                     <td>
-                      <button className="fs-5" style={{border:'none',background:'none'}} onClick={() => editHandler(item)}>{item.status === true ? <HiCheckCircle className='focus:outline-none text-green-700 text-lg' style={{color:'green'}}/> : <RiCloseCircleFill className='focus:outline-none text-red-700 text-lg' style={{color:'red'}}/>}</button>
+                      <button
+                        className="fs-5"
+                        style={{ border: "none", background: "none" }}
+                        onClick={() => editHandler(item)}
+                      >
+                        {item.status === true ? (
+                          <HiCheckCircle
+                            className="focus:outline-none text-green-700 text-lg"
+                            style={{ color: "green" }}
+                          />
+                        ) : (
+                          <RiCloseCircleFill
+                            className="focus:outline-none text-red-700 text-lg"
+                            style={{ color: "red" }}
+                          />
+                        )}
+                      </button>
                     </td>
                     <td>
                       <Link to={`/talukaview/${item._id}`}>
@@ -184,7 +201,7 @@ console.log(taluka)
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default list
+export default list;

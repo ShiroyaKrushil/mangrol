@@ -45,7 +45,7 @@ const Viewvehicle = () => {
   }, []);
 
   const back = () => {
-    navigate(Page);
+    navigate('/districtlist'+ Page);
   };
 
   return (

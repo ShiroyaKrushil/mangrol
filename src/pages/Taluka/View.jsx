@@ -10,6 +10,7 @@ const View = () => {
   const parms = useParams();
   const [taluka, setTaluka] = useState([]);
   const navigate = useNavigate();
+  let [Page,setPage] = useState('');
 
   const deletedistrict = async () => {
     const data = {
@@ -36,7 +37,13 @@ const View = () => {
     }
   };
 
+  const back = () => {
+    navigate('/talukalist'+ Page);
+  };
+
   useEffect(() => {
+    let page = localStorage.getItem('currentPage')
+    setPage(page)
     fetchdata();
   }, [parms.id]);
 
@@ -55,7 +62,8 @@ const View = () => {
           />
           <Button
             name="Back"
-            link="/talukalist"
+            // link="/talukalist"
+            onclick={back}
             icon={<i class="fa-solid fa-arrow-left p-1"></i>}
           />
         </div>

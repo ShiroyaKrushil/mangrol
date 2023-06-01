@@ -3,13 +3,14 @@ import Button from "../../Components/Button";
 import { useParams, useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer";
 import { api } from "../../helper/api";
-import { TfiCheckBox } from "react-icons/tfi";
-import { MdCheckBoxOutlineBlank } from "react-icons/md";
+import { RiCloseCircleFill } from "react-icons/ri";
+import { HiCheckCircle } from "react-icons/hi";
 
 const Viewuser = () => {
   const parms = useParams();
   let [user, setUser] = useState([]);
   const navigate = useNavigate();
+  let [Page, setPage] = useState("");
 
   const deleteHandler = async () => {
     const data = {
@@ -35,8 +36,12 @@ const Viewuser = () => {
       setUser(response.data.data);
     }
   };
-
+  const back = () => {
+    navigate("/userlist" + Page);
+  };
   useEffect(() => {
+    let page = localStorage.getItem("currentPage");
+    setPage(page);
     fetchdata();
   }, [parms.id]);
   return (
@@ -48,14 +53,17 @@ const Viewuser = () => {
         <div className="col-6">
           <Button
             name="Back"
-            link="/userlist"
+            onclick={back}
             icon={<i class="fa-solid fa-arrow-left p-1"></i>}
           />
         </div>
         <div className="container-fluid" style={{ marginTop: "60px" }}>
           <div className="row">
             <div className="row d-flex justify-content-center ">
-              <div className="col-md-3 col-sm-4 py-4 m-3 box" style={{width:'490px'}}>
+              <div
+                className="col-md-3 col-sm-4 py-4 m-3 box"
+                style={{ width: "490px" }}
+              >
                 <table class="table table-borderless">
                   <tbody className="fs-5">
                     <tr>
@@ -78,9 +86,9 @@ const Viewuser = () => {
                       <td>:</td>
                       <td>
                         {user.status === true ? (
-                          <TfiCheckBox className="text-lg font-extrabold" />
+                          <HiCheckCircle style={{ color: "green" }} />
                         ) : (
-                          <MdCheckBoxOutlineBlank />
+                          <RiCloseCircleFill style={{ color: "red" }} />
                         )}
                       </td>
                     </tr>

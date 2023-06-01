@@ -63,6 +63,8 @@ const Business_typelist = () => {
       "",
       window.location.pathname + "?page_no=" + currentPage
     );
+    localStorage.setItem("currentPage", "?page_no=" + currentPage);
+
   };
 
   const editHandler =async(item) => {
@@ -105,7 +107,7 @@ const Business_typelist = () => {
   useEffect(() => {
     setCurrentPage(currentPage);
     loaddata(!!params ? params : 1);
-  }, [recordPerPage]);
+  }, [recordPerPage][editHandler]);
 
   return (
     <div className="container- px-3 mt-5">

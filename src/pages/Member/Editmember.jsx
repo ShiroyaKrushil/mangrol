@@ -224,7 +224,7 @@ const Editmember = () => {
                   onClick={addrepresentative}
                   style={{ border: "none", background: "none", color: "blue" }}
                 >
-                  {representative !== 2 ? <FaPlusCircle /> : ""}
+                  {representative.length !== 2 ? <FaPlusCircle /> : ""}
                 </button>
               </span>
             </h6>
@@ -263,7 +263,7 @@ const Editmember = () => {
                           color: "red",
                         }}
                       >
-                        <FaMinusCircle />
+                         {representative.length !== 1 ? <FaMinusCircle /> : ""}
                       </button>
                     </span>
                   </div>

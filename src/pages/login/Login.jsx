@@ -42,6 +42,7 @@ const Login = () => {
     if (response && response.status === 200) {
       navigate("/dashboard");
       window.location.reload();
+      localStorage.setItem('email',email)
     } else {
     }
   };
@@ -51,8 +52,6 @@ const Login = () => {
     signInWithPopup(auth, googleprovider)
       .then((result) => {
         const loggeduser = result.user;
-        localStorage.getItem("uid");
-        console.log(loggeduser);
         navigate("/dashboard");
       })
       .catch((err) => {

@@ -4,7 +4,7 @@ import Footer from "../../Components/Footer_two";
 import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
 import { useState } from "react";
 import { api } from "../../helper/api";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import Joi from "joi";
 import { resetError, showError } from "../../helper/error";
 
@@ -44,6 +44,7 @@ const Addmember = () => {
   const [zoneData, setZoneData] = useState([]);
 
   let params = useParams();
+  const navigate = useNavigate();
   const validate = (data) => {
     const schema = Joi.object({
         date: Joi.date().required().label('Date'),
@@ -133,6 +134,8 @@ const Addmember = () => {
     }
   };
 
+
+
   const fetchdata = async () => {
     let data = {};
     let response = await api("member", data);
@@ -144,6 +147,10 @@ const Addmember = () => {
 
     // if (response && response == 200) {
     // }
+  };
+
+  const cancleHandler = () => {
+    navigate("/memberlist");
   };
 
   const addrepresentative = () => {
@@ -591,7 +598,7 @@ const Addmember = () => {
           </div>
         </form>
         <div >
-          <Footer add={saveHandler} />
+          <Footer add={saveHandler} cancle={cancleHandler}/>
         </div>
       </div>
     </div>
