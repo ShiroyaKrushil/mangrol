@@ -12,7 +12,7 @@ const Associationlist = () => {
     const response = await api("association/view", data);
 
     if (response && response.status === 200) {
-      setAssociation(response?.data?.data);
+      setAssociation(response.data);
     }
   };
 
@@ -20,7 +20,6 @@ const Associationlist = () => {
     fetchdata();
   }, []);
 
-  console.log(association);
   return (
     <div class="container- px-3 mt-5">
       <div className="row p-4">
@@ -30,7 +29,7 @@ const Associationlist = () => {
         <div className="col-6">
           <Button
             name="Edit"
-            link={`/editassociation/${parms.id}`}
+            link={`/editassociation/${association.data?.association[0]?._id}`}
             icon={<i class="fa-regular fa-pen-to-square p-1"></i>}
             style={{ marginLeft: "20px" }}
           />
@@ -44,17 +43,17 @@ const Associationlist = () => {
                     <tr>
                       <td className="w-36">Name</td>
                       <td>:</td>
-                      <td>{association.name}</td>
+                      <td>{association.data?.association[0]?.name}</td>
                     </tr>
                     <tr>
                       <td className="w-36">Email ID</td>
                       <td>:</td>
-                      <td>{association.email_id}</td>
+                      <td>{association.data?.association[0]?.email_id}</td>
                     </tr>
                     <tr>
                       <td className="w-36">Phone No.</td>
                       <td>:</td>
-                      <td>{association.phone_no}</td>
+                      <td>{association.data?.association[0]?.phone_no}</td>
                     </tr>
                     <tr>
                       <td className="w-36" style={{ fontSize: "25px" }}>
@@ -64,32 +63,44 @@ const Associationlist = () => {
                     <tr>
                       <td className="w-36">Address-line-1</td>
                       <td>:</td>
-                      <td>{association.address?.address_line_1}</td>
+                      <td>
+                        {
+                          association.data?.association[0]?.address
+                            ?.address_line_2
+                        }
+                      </td>
                     </tr>
                     <tr>
                       <td className="w-36">Address-line-2</td>
                       <td>:</td>
-                      <td>{association.address?.address_line_2}</td>
+                      <td>
+                        {
+                          association.data?.association[0]?.address
+                            ?.address_line_1
+                        }
+                      </td>
                     </tr>
                     <tr>
                       <td className="w-36">Pincode</td>
                       <td>:</td>
-                      <td>{association.address?.pincode}</td>
+                      <td>
+                        {association.data?.association[0]?.address?.pincode}
+                      </td>
                     </tr>
                     <tr>
                       <td className="w-36">City</td>
                       <td>:</td>
-                      <td>{association.address?.city}</td>
+                      <td>{association.data?.association[0]?.address?.city}</td>
                     </tr>
                     <tr>
                       <td className="w-36">Taluka</td>
                       <td>:</td>
-                      <td>{association.address?.taluka?.name}</td>
+                      <td>{association.data?.master?.taluka[0]?.name}</td>
                     </tr>
                     <tr>
                       <td className="w-36">District</td>
                       <td>:</td>
-                      <td>{association.address?.district?.name}</td>
+                      <td>{association.data?.master?.district[0]?.name}</td>
                     </tr>
                   </tbody>
                 </table>

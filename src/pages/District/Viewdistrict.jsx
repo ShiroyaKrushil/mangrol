@@ -9,6 +9,7 @@ import { HiCheckCircle } from "react-icons/hi";
 const Viewvehicle = () => {
   const [district, setDistrict] = useState([]);
   const parms = useParams();
+  let [Page,setPage] = useState('');
   const navigate = useNavigate();
 
   const deletedistrict = async () => {
@@ -24,23 +25,27 @@ const Viewvehicle = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchdata = async () => {
-      let data = {
-        _id: parms.id,
-      };
-
-      const response = await api("master/district/view", data);
-
-      if (response && response.status === 200) {
-        setDistrict(response.data.data);
-      }
+  const fetchdata = async () => {
+    let data = {
+      _id: parms.id,
     };
+
+    const response = await api("master/district/view", data);
+
+    if (response && response.status === 200) {
+      setDistrict(response.data.data);
+    }
+  };
+
+  useEffect(() => {
+
+    let page = localStorage.getItem('currentPage')
+    setPage(page)
     fetchdata();
   }, []);
 
   const back = () => {
-    navigate(`/districtlist`);
+    navigate(Page);
   };
 
   return (

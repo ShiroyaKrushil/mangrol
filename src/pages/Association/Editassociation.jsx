@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const Editassociation = () => {
-  const association = useParams();
+  const parms = useParams();
 
   const [name, setName] = useState("");
   const [email_id, setEmail_id] = useState("");
@@ -21,60 +21,57 @@ const Editassociation = () => {
   const [talukaData, setTalukaData] = useState([]);
   const [districtData, setDistrictData] = useState([]);
 
-
   const fetchdata = async () => {
     let data = {
-        _id: association.id,
-        master_request: 1
-    }
-    const response = await api('association/view', data);
+      _id: parms.id,
+      master_request: 1,
+    };
+    const response = await api("association/view", data);
 
     if (response && response.status === 200) {
-        setName(response.data.data.name);
-        setEmail_id(response.data.data.email_id);
-        setPhone_no(response.data.data.phone_no);
-        setAddress_line_1(response.data.data.address?.address_line_1);
-        setAddress_line_2(response.data.data.address?.address_line_2);
-        setPincode(response.data.data.address?.pincode);
-        setCity(response.data.data.address?.city);
-        setTaluka(response.data.data?.taluka?.name);
-        setDistrict(response.data.data?.district?.name);
-        setDistrictData(response.data.master?.district);
-        setTalukaData(response.data.master?.taluka);
+      setName(response.data?.data?.association[0].name);
+      setEmail_id(response.data?.data?.association[0].email_id);
+      setPhone_no(response.data?.data?.association[0].phone_no);
+      setAddress_line_1(response.data?.data?.association[0].address?.address_line_1);
+      setAddress_line_2(response.data?.data?.association[0].address?.address_line_2);
+      setPincode(response.data?.data?.association[0].address?.pincode);
+      setCity(response.data?.data?.association[0].address?.city);
+      setTaluka(response.data.data?.taluka?.name);
+      setDistrict(response.data.data?.district?.name);
+      setDistrictData(response.data?.data?.master?.district);
+      setTalukaData(response.data?.data?.master?.taluka);
     }
+  };
 
-};
-
-const saveHandler = async () => {
-  let address = {
+  const saveHandler = async () => {
+    let address = {
       address_line_1: address_line_1,
       address_line_2: address_line_2,
       pincode: pincode,
       city: city,
       taluka: taluka,
       district: district,
-  }
-  let data = {
-      _id: association.id,
+    };
+    let data = {
+      _id: parms.id,
       name: name,
       email_id: email_id,
       phone_no: phone_no,
-      address: address
-  }
-  // const { error } = validate(data);
-  // if (error) return showError(error.details);
+      address: address,
+    };
+    // const { error } = validate(data);
+    // if (error) return showError(error.details);
 
-  const response = await api('association/edit', data);
+    const response = await api("association/edit", data);
 
-  if (response && response.status === 200) {
-      navigate(`/associationlist/${association._id}`);
-  }
+    if (response && response.status === 200) {
+      navigate(`/associationlist/${parms._id}`);
+    }
+  };
 
-}
-
-useEffect(()=>{
-  fetchdata();
-},[])
+  useEffect(() => {
+    fetchdata();
+  }, []);
   return (
     <div class="container- px-3 mt-5">
       <div className="row p-4">
@@ -92,7 +89,7 @@ useEffect(()=>{
       <div class="row p-4 mt-5 d-flex justify-content-center align-items-center">
         <form className="p-4 mb-5">
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 ">
               <label for="formGroupExampleInput" className="fs-6">
                 Name
               </label>
@@ -105,7 +102,7 @@ useEffect(()=>{
                 value={name}
               />
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mt-sm-3 mt-md-0">
               <label for="formGroupExampleInput" className="fs-6">
                 Email ID
               </label>
@@ -117,7 +114,7 @@ useEffect(()=>{
                 value={email_id}
               />
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mt-sm-3 mt-md-0">
               <label for="formGroupExampleInput" className="fs-6">
                 Phone No.
               </label>
@@ -130,9 +127,9 @@ useEffect(()=>{
               />
             </div>
           </div>
-          <div className="row mt-4">
+          <div className="row mt-3">
             <h3>Address</h3>
-            <div className="col-md-12">
+            <div className="col-md-12 mt-sm-0 mt-md-0">
               <label for="formGroupExampleInput" className="fs-6">
                 Address_line_1
               </label>
@@ -142,13 +139,13 @@ useEffect(()=>{
                 cols="30"
                 rows="1"
                 className="form-control"
-                onChange={(e)=>setAddress_line_1(e.target.value)}
+                onChange={(e) => setAddress_line_1(e.target.value)}
                 value={address_line_1}
               ></textarea>
             </div>
           </div>
           <div className="row mt-4">
-            <div className="col-md-12">
+            <div className="col-md-12 mt-sm-0 mt-md-0">
               <label for="formGroupExampleInput" className="fs-6">
                 Address_line_2
               </label>
@@ -158,13 +155,13 @@ useEffect(()=>{
                 cols="30"
                 rows="1"
                 className="form-control"
-                onChange={(e)=>setAddress_line_2(e.target.value)}
+                onChange={(e) => setAddress_line_2(e.target.value)}
                 value={address_line_2}
               ></textarea>
             </div>
           </div>
           <div className="row mt-4">
-            <div className="col-md-6">
+            <div className="col-md-6 mt-sm-0 mt-md-0">
               <label for="formGroupExampleInput" className="fs-6">
                 Pincode
               </label>
@@ -176,7 +173,7 @@ useEffect(()=>{
                 value={pincode}
               />
             </div>
-            <div className="col-md-6">
+            <div className="col-md-6 mt-sm-3 mt-md-0">
               <label for="formGroupExampleInput" className="fs-6">
                 City
               </label>
@@ -190,33 +187,56 @@ useEffect(()=>{
             </div>
           </div>
           <div className="row mt-4">
-            <div className="col-md-6">
+            <div className="col-md-6 mt-sm-0 mt-md-0">
               <label for="formGroupExampleInput" className="fs-6">
                 Taluka
               </label>
-              <select name="" id="" className="form-select" onChange={(e)=>setTaluka(e.target.value)} value={taluka}>
-                <option value="" disabled>
+              <select
+                name=""
+                id=""
+                className="form-select"
+                onChange={(e) => setTaluka(e.target.value)}
+                value={taluka}
+              >
+                <option value="Select Taluka" disabled>
                   Select Taluka
                 </option>
-                <option value="" >
-                  Select Taluka
-                </option>
+                {talukaData.map((item) => {
+                  return (
+                    <>
+                      <option value={item._id}>{item.name}</option>
+                    </>
+                  );
+                })}
               </select>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-6 mt-sm-3 mt-md-0">
               <label for="formGroupExampleInput" className="fs-6">
                 District
               </label>
-              <select name="" id="" className="form-select" onChange={(e)=>setDistrict(e.target.value)} value={district}>
-                <option value="" disabled>
+              <select
+                name=""
+                id=""
+                className="form-select"
+                onChange={(e) => setDistrict(e.target.value)}
+                value={district}
+              >
+                <option value=" Select District" disabled>
                   Select District
                 </option>
+                {districtData.map((item) => {
+                  return (
+                    <>
+                      <option value={item._id}>{item.name}</option>
+                    </>
+                  );
+                })}
               </select>
             </div>
           </div>
         </form>
-        <div style={{ marginTop: "-200px" }}>
-          <Footer add={saveHandler}/>
+        <div>
+          <Footer add={saveHandler} />
         </div>
       </div>
     </div>

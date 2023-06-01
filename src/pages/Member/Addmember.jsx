@@ -156,7 +156,6 @@ const Addmember = () => {
     ]);
   };
 
-  console.log(representative)
   const removeInputFields = (index) => {
     const rows = [...representative];
     rows.splice(index, 1);
@@ -241,7 +240,7 @@ const Addmember = () => {
                   onClick={addrepresentative}
                   style={{ border: "none", background: "none", color: "blue" }}
                 >
-                  {representative !== 2 ? <FaPlusCircle /> : ""}
+                  {representative.length !== 2 ? <FaPlusCircle /> : ""}
                 </button>
               </span>
             </h6>
@@ -280,7 +279,7 @@ const Addmember = () => {
                           color: "red",
                         }}
                       >
-                        <FaMinusCircle />
+                         {representative.length !== 1 ? <FaMinusCircle /> : ""}
                       </button>
                     </span>
                   </div>

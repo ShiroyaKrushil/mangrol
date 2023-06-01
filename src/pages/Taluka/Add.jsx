@@ -81,7 +81,7 @@ const Add = () => {
                 value={name}
               />
             </div>
-            <div class="col- col-md-6">
+            <div class="col- col-md-6 mt-sm-3 mt-md-0">
               <label for="formGroupExampleInput" className="fs-6">
                 District
               </label>

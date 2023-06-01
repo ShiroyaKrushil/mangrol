@@ -13,9 +13,9 @@ import { HiCheckCircle } from "react-icons/hi";
 
 const VehicleList = () => {
   let queryParams = new URLSearchParams(window.location.search);
-
   let params = queryParams.get("page_no");
   let initialPage = parseInt(params);
+  console.log(initialPage);
 
   const [district, setDistrict] = useState([]);
   const [totalRecods, setTotalRecods] = useState(0);
@@ -43,7 +43,6 @@ const VehicleList = () => {
     };
 
     let response = await api("master/district", data);
-    console.log(response.data.data);
     if (response && response.status === 200) {
       if (response?.data?.total_records) {
         setTotalRecods(response?.data?.total_records);
@@ -62,25 +61,13 @@ const VehicleList = () => {
       "",
       window.location.pathname + "?page_no=" + currentPage
     );
+    localStorage.setItem("currentPage", window.location.pathname + "?page_no=" + currentPage);
   };
 
-  const editHandler =async(item) => {
+  const editHandler = async (item) => {
     let data = {
       _id: item._id,
       status: !item.status,
-    };
-
-    const response = await api("master/district/status", data);
-    if (response && response.status === 200) {
-      setStatus("");
-      loaddata();
-    }
-  };
-
-  const statusHandler = async () => {
-    let data = {
-      _id: id,
-      status: !status,
     };
 
     const response = await api("master/district/status", data);
@@ -167,7 +154,23 @@ const VehicleList = () => {
                     <td>{index + 1}</td>
                     <td>{item.name}</td>
                     <td>
-                      <button className="fs-5" style={{border:'none',background:'none'}} onClick={() => editHandler(item)}>{item.status === true ? <HiCheckCircle className='focus:outline-none text-green-700 text-lg' style={{color:'green'}}/> : <RiCloseCircleFill className='focus:outline-none text-red-700 text-lg' style={{color:'red'}}/>}</button>
+                      <button
+                        className="fs-5"
+                        style={{ border: "none", background: "none" }}
+                        onClick={() => editHandler(item)}
+                      >
+                        {item.status === true ? (
+                          <HiCheckCircle
+                            className="focus:outline-none text-green-700 text-lg"
+                            style={{ color: "green" }}
+                          />
+                        ) : (
+                          <RiCloseCircleFill
+                            className="focus:outline-none text-red-700 text-lg"
+                            style={{ color: "red" }}
+                          />
+                        )}
+                      </button>
                     </td>
                     <td>
                       <Link to={`/viewdistrict/${item._id}`}>
