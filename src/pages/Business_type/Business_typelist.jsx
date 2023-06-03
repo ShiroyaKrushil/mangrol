@@ -51,7 +51,7 @@ const Business_typelist = () => {
       }
       setBusinessType(response.data.data);
     } else {
-      alert("error");
+      
     }
   };
 

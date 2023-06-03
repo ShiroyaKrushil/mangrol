@@ -17,7 +17,7 @@ const Dashboard = () => {
     if (response && response.status === 200) {
       setMember(response.data.total_records);
     } else {
-      alert("error");
+      
     }
     console.log(response)
 
@@ -29,7 +29,7 @@ const Dashboard = () => {
     if (response && response.status === 200) {
       setDistrict(response.data.total_records);
     } else {
-      alert("error");
+      
     }
   };
 
@@ -38,7 +38,7 @@ const Dashboard = () => {
     if (response && response.status === 200) {
       setTaluka(response.data.total_records);
     } else {
-      alert("error");
+      
     }
   };
 
@@ -47,7 +47,7 @@ const Dashboard = () => {
     if (response && response.status === 200) {
       setZone(response.data.total_records);
     } else {
-      alert("error");
+      
     }
   };
 
@@ -56,7 +56,7 @@ const Dashboard = () => {
     if (response && response.status === 200) {
       setBusiness_types(response.data.total_records);
     } else {
-      alert("error");
+      
     }
   };
 
@@ -65,7 +65,7 @@ const Dashboard = () => {
     if (response && response.status === 200) {
       setPower_supply(response.data.total_records);
     } else {
-      alert("error");
+      
     }
   };
 
@@ -74,7 +74,7 @@ const Dashboard = () => {
     if (response && response.status === 200) {
       setAssociation(response.data.total_records);
     } else {
-      alert("error");
+      
     }
   };
 
@@ -83,7 +83,7 @@ const Dashboard = () => {
     if (response && response.status === 200) {
       setUser(response.data.total_records);
     } else {
-      alert("error");
+      
     }
   };
   

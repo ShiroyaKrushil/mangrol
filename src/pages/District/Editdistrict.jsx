@@ -72,7 +72,7 @@ const Editdistrict = () => {
     let response = await api("master/district/edit", data);
     if (response && response.status === 200) {
       navigate(`/viewdistrict/${district.id}`);
-    } else alert("error");
+    } else {}
   };
 
   const canclehandler = () => {

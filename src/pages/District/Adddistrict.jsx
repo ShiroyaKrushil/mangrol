@@ -69,7 +69,7 @@ const Addvehicle = () => {
     if (response && response.status === 200) {
       setName('');
     } else {
-      alert("error");
+      
     }
   };
 

@@ -35,7 +35,6 @@ const Addbusiness_type = () => {
     if (response && response.status === 200) {
       setName('');
     } else {
-      alert("error");
     }
   };
 

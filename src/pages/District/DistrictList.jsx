@@ -26,7 +26,6 @@ const VehicleList = () => {
     !!initialPage ? initialPage : 1
   );
 
-  let [id, setId] = useState();
   let [status, setStatus] = useState("");
   let [name, setName] = useState("");
 
@@ -49,7 +48,7 @@ const VehicleList = () => {
       }
       setDistrict(response.data.data);
     } else {
-      alert("error");
+      
     }
   };
 

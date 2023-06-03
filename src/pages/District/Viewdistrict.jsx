@@ -21,7 +21,6 @@ const Viewvehicle = () => {
     if (response && response.status === 200) {
       navigate("/districtlist");
     } else {
-      alert("error");
     }
   };
 

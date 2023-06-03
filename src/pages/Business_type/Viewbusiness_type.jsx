@@ -59,6 +59,7 @@ const Viewbusiness_type = () => {
             icon={<i class="fa-regular fa-pen-to-square p-1"></i>}
             style={{ marginLeft: "20px" }}
           />
+          
           <Button
             name="Back"
             onclick={back}

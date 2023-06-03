@@ -6,12 +6,6 @@ import { useNavigate } from "react-router-dom";
 import Joi from "joi";
 import { resetError, showError } from "../../helper/error";
 import { FcGoogle } from "react-icons/fc";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getAuth } from "firebase/auth";
-import { app } from "../../firebase/firebase.config";
-
-const googleprovider = new GoogleAuthProvider();
-const auth = getAuth(app);
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -47,17 +41,7 @@ const Login = () => {
     }
   };
 
-  const handlelogin = (e) => {
-    e.preventDefault();
-    signInWithPopup(auth, googleprovider)
-      .then((result) => {
-        const loggeduser = result.user;
-        navigate("/dashboard");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  
 
   return (
     <section className="">
@@ -113,18 +97,7 @@ const Login = () => {
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4 ">
                         <Button name="Login" onclick={login} />
                       </div>
-                      <div className="text-center">
-                        <span style={{ opacity: "0.2", fontSize: "15px" }}>
-                          ------------------------ OR ------------------------
-                        </span>
-                      </div>
-                      <div className="gmail text-center mt-3 mb-3">
-                        <FcGoogle
-                          fontSize={30}
-                          style={{ cursor: "pointer" }}
-                          onClick={handlelogin}
-                        />
-                      </div>
+                     
                       {/* <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                         <p>
                           Don`t have an account?
