@@ -10,7 +10,8 @@ import {
 } from "react-icons/ti";
 import { RiCloseCircleFill } from "react-icons/ri";
 import { HiCheckCircle } from "react-icons/hi";
-const list = () => {
+
+const List = () => {
   let queryParams = new URLSearchParams(window.location.search);
   let params = queryParams.get("page_no");
   let initialPage = parseInt(params);
@@ -204,4 +205,4 @@ const list = () => {
   );
 };
 
-export default list;
+export default List;

@@ -4,11 +4,11 @@ import Footer from "../../Components/Footer_two";
 import { useState } from "react";
 import { api } from "../../helper/api";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 
 const Editassociation = () => {
   const parms = useParams();
-
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email_id, setEmail_id] = useState("");
   const [phone_no, setPhone_no] = useState("");
